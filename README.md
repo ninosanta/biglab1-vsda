@@ -2,12 +2,12 @@
 
 # Class: 2021 WA1
 
-## Team name: TEAM_NAME
+## Team name: VSDA
 Team members:
-* s123456 LASTNAME FIRSTNAME
-* s123456 LASTNAME FIRSTNAME 
-* s123456 LASTNAME FIRSTNAME
-* s123456 LASTNAME FIRSTNAME (delete line if not needed)
+* s284101 Vespa Antonio
+* s281561 Santa Rosa Antonino
+* s278176 De Stefano Carmine
+* s265350 Alagna Francesco
 
 ## Instructions
 
