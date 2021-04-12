@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, ListGroup, Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Task from './Task';
-import DayJs from 'react-dayjs';
 
 function App() {
   return (
@@ -22,7 +21,7 @@ function App() {
         </Navbar>
       <Row>
         <Col xs={3}>
-          <aside className="collapse d-sm-block col-sm-4 col-12 bg-primary" id="filter-sidebar" style={{minHeight: '100vh'}, {minWidth: '100%'}}>
+          <aside className="collapse d-sm-block col-sm-4 col-12 bg-primary" id="filter-sidebar" style={{minHeight: '100vh', minWidth: '100%'}}>
             <div className="list-group list-group-flush">
               <a href="#" id="filter-all" className="list-group-item list-group-item-action active">All</a>
               <a href="#" id="filter-important" className="list-group-item list-group-item-action">Imp</a>
