@@ -20,13 +20,13 @@ function App() {
       <Row>
         <Col xs={3}>
           <aside className="collapse d-sm-block col-sm-4 col-12 bg-primary" id="filter-sidebar" style={{minHeight: '100vh', minWidth: '100%'}}>
-            <div className="list-group list-group-flush">
-              <a href="#" id="filter-all" className="list-group-item list-group-item-action active">All</a>
-              <a href="#" id="filter-important" className="list-group-item list-group-item-action">Imp</a>
-              <a href="#" id="filter-today" className="list-group-item list-group-item-action">Today</a>
-              <a href="#" id="filter-week" className="list-group-item list-group-item-action">Week</a>
-              <a href="#" id="filter-private" className="list-group-item list-group-item-action">Priv</a>
-            </div>
+            <ListGroup variant="flush">
+              <ListGroup.Item id="filter-all" className="list-group-item list-group-item-action active">All</ListGroup.Item>
+              <ListGroup.Item id="filter-all" className="list-group-item list-group-item-action">Important</ListGroup.Item>
+              <ListGroup.Item id="filter-all" className="list-group-item list-group-item-action">Today</ListGroup.Item>
+              <ListGroup.Item id="filter-all" className="list-group-item list-group-item-action">This week</ListGroup.Item>
+              <ListGroup.Item id="filter-all" className="list-group-item list-group-item-action">Private</ListGroup.Item>
+            </ListGroup>
           </aside>
         </Col>
         <Col>
