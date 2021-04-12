@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ListGroup, Badge, Form } from "react-bootstrap";
+import DayJs from 'react-dayjs';
 
 function Task(props) {
     const taskId = props.id;
@@ -11,7 +12,7 @@ function Task(props) {
             <path fillRule="evenodd" d="M14 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V2a1 1 0 00-1-1zM2 0a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2H2z" clipRule="evenodd"></path>
             <path fillRule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"></path>
         </svg> : '');
-    const [dateBadge, setDateBadge] = useState(props.dateBadge || '');
+    const [date, setDateBadge] = useState(props.date || '');
     const [dateVariant, setDateVariant] = useState(props.dateVariant || 'dark'); // !! date variant must change based on the date
     return (
         <ListGroup.Item id={`task-${taskId}`} className="d-flex w-100 justify-content-between" action onClick={()=>{console.log("task clicked")}}>
@@ -23,7 +24,7 @@ function Task(props) {
             </Form>
             <Badge id={`task-${taskId}-project`} pill variant="info">{projectBadge}</Badge>
             <div id={`task-${taskId}-icon`}>{icon}</div>
-            <Badge id={`task-${taskId}-date`} variant={dateVariant}>{dateBadge}</Badge>
+            <Badge id={`task-${taskId}-date`} variant={dateVariant}><DayJs format="DD-MM-YYYY">{ date }</DayJs></Badge>
         </ListGroup.Item>
     );
 }
