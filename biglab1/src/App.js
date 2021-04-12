@@ -11,8 +11,6 @@ function App() {
           </Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -32,7 +30,7 @@ function App() {
           </aside>
         </Col>
         <Col>
-          <h1>Title</h1>
+          <h1 className="pt-4">Title</h1>
           <ListGroup variant="flush">
             <Task id={0} label="blank task"/>
             <Task id={1} label="task1" projectBadge='project' dateBadge='Today at 14:00'/>
