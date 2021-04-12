@@ -8,9 +8,7 @@ function App() {
       <Row>
         <Col xs={1}>
           <aside className="collapse d-sm-block bg-primary align-items-center text-center" id="filter-sidebar" style={{minHeight: '100vh', minWidth: '100%'}}>
-          <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-home">Home</Tooltip>}>
-              <Button id="home" className="mt-4" variant="link"><i className="bi bi-list-nested text-dark" aria-label="Home" style={{fontSize: '1.5rem'}} onMouseOver={()=>{this.removeClass("bi-list-nested");this.removeClass("bi-list-nested-fill");}}></i></Button>
-            </OverlayTrigger>
+            <Button id="home" className="mt-4" variant="link"><i className="bi bi-list-nested text-dark" aria-label="Home" style={{fontSize: '1.5rem'}}></i></Button>
             <ButtonGroup vertical className="m-1">
               <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-all">All inbox</Tooltip>}>
                 <Button id="filter-all" className="mt-4" variant="link"><i className="bi bi-inbox text-light" aria-label="All" style={{fontSize: '1.5rem'}}></i></Button>
