@@ -9,27 +9,27 @@ function App() {
         <Col md={1} xs={1} className="p-0 m-0 align-items-center">
           <aside className="bg-primary align-items-center text-center mx-auto" id="filter-sidebar" style={{ minHeight: '100vh', minWidth: '100%' }}>
             <div>
-              <Button id="home" className="mt-4 p-0 navbar-toggler" variant="link"><i className="bi bi-list-nested text-dark" aria-label="Home" style={{ fontSize: '1.5rem' }}></i></Button>
+              <Button id="home" className="mt-4 p-0" variant="link"><i className="bi bi-list-nested text-dark" aria-label="Home" style={{ fontSize: '1.5rem' }}></i></Button>
             </div>
             <div>
               <ButtonGroup vertical className="m-0 w-100">
                 <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-all">All inbox</Tooltip>}>
-                  <Button id="filter-all" className="mt-4 p-0" variant="link"><i className="bi bi-inbox text-light" aria-label="All" style={{ fontSize: '1.5rem' }}></i></Button>
+                  <Button id="filter-all" className="mt-4 p-0" variant="link"><i className="bi bi-inbox text-light" aria-label="All" style={{ fontSize: '1.6em' }}></i></Button>
                 </OverlayTrigger>
                 <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-important">Important</Tooltip>}>
-                  <Button id="filter-important" className="mt-4 p-0" variant="link"><i className="bi bi-bookmark-star text-light" aria-label="Important" style={{ fontSize: '1rem' }}></i></Button>
+                  <Button id="filter-important" className="mt-4 p-0" variant="link"><i className="bi bi-bookmark-star text-light" aria-label="Important" style={{ fontSize: '1.6rem' }}></i></Button>
                 </OverlayTrigger>
                 <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-today">Today</Tooltip>}>
-                  <Button id="filter-today" className="mt-4 p-0" variant="link"><i className="bi bi-sunset text-light" aria-label="Today" style={{ fontSize: '1rem' }}></i></Button>
+                  <Button id="filter-today" className="mt-4 p-0" variant="link"><i className="bi bi-sunset text-light" aria-label="Today" style={{ fontSize: '1.6rem' }}></i></Button>
                 </OverlayTrigger>
                 <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-week">This week</Tooltip>}>
-                  <Button id="filter-week" className="mt-4 p-0" variant="link"><i className="bi bi-calendar-week text-light" aria-label="This week" style={{ fontSize: '1rem' }}></i></Button>
+                  <Button id="filter-week" className="mt-4 p-0" variant="link"><i className="bi bi-calendar-week text-light" aria-label="This week" style={{ fontSize: '1.6rem' }}></i></Button>
                 </OverlayTrigger>
                 <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-private">Private</Tooltip>}>
-                  <Button id="filter-private" className="mt-4 p-0" variant="link"><i className="bi bi-eye-slash text-light" aria-label="Private" style={{ fontSize: '1rem' }}></i></Button>
+                  <Button id="filter-private" className="mt-4 p-0" variant="link"><i className="bi bi-eye-slash text-light" aria-label="Private" style={{ fontSize: '1.6rem' }}></i></Button>
                 </OverlayTrigger>
                 <OverlayTrigger placement="right" overlay={<Tooltip id="button-tooltip-all">Search</Tooltip>}>
-                  <Button id="filter-search" className="mt-4 p-0" variant="link"><i className="bi bi-search text-light" aria-label="Search" style={{ fontSize: '1rem' }}></i></Button>
+                  <Button id="filter-search" className="mt-4 p-0" variant="link"><i className="bi bi-search text-light" aria-label="Search" style={{ fontSize: '1.6rem' }}></i></Button>
                 </OverlayTrigger>
               </ButtonGroup>
             </div>
@@ -44,10 +44,10 @@ function App() {
             </div>
           </aside>
         </Col>
-        <Col md={3} className="collapse bg-info align-items-center text-center p-2 collapse d-sm-block">
+        <Col md={3} id="collapse-col" className="collapse bg-info align-items-center text-center p-2 collapse d-sm-block">
         </Col>
         <Col md={8} xs="auto" className="mr-4" className="p-5 m-0">
-          <ButtonToolbar aria-label="Toolbar with button groups" fixed="right">
+          <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
             <ButtonGroup className="mr-2" aria-label="First group">
               <Button className="bg-primary">Morning</Button>
               <Button className="bg-primary">Afternoon</Button>
