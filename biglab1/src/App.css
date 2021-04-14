@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+.tooltip.tooltip-scroll ::-webkit-scrollbar {
+  background-color: #F1F1F1;
+}
+
+.tooltip.tooltip-scroll ::-webkit-scrollbar-thumb {
+  background-color: #C1C1C1;
+  border: 1px solid #F1F1F1;
+}
+
+/* optional */
+.tooltip.tooltip-scroll ::-webkit-scrollbar-button {
+  background-color: #F1F1F1;
+}
