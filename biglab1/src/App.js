@@ -32,32 +32,35 @@ function App() {
           </aside>
         </Col>
         <Col md={3} id="collapse-col" className="collapse bg-light align-items-center text-center d-md-block">
-          <div className="d-flex justify-content-center pt-3">
-            <Card style={{ width: '18rem'}}>
-              <Card.Img variant="top" src={img} />
-              <Card.Body>
-                <Card.Title>Web Application I</Card.Title>
-                <Card.Text>
-                  ...
+          <div className="overflow-auto">
+            <div className="d-flex justify-content-center pt-3">
+              <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={img} />
+                <Card.Body>
+                  <Card.Title>Web Application I</Card.Title>
+                  <Card.Text>
+                    The course aims at presenting the main techniques for creating distributed web applications.
               </Card.Text>
-                <Button variant="primary">Visualize</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="d-flex justify-content-center pt-3">
-            <Card style={{ width: '18rem'}}>
-              <Card.Img variant="top" src={img2} />
-              <Card.Body>
-                <Card.Title>Programmazione Di Sistema</Card.Title>
-                <Card.Text>
-                  ...
+                  <Button variant="primary">Visualize</Button>
+                </Card.Body>
+              </Card>
+            </div>
+            <div className="d-flex justify-content-center pt-3">
+              <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={img2} />
+                <Card.Body>
+                  <Card.Title>Programmazione Di Sistema</Card.Title>
+                  <Card.Text>
+                    Il corso si articola in due parti: la prima affronta gli
+                    aspetti interni ...
               </Card.Text>
-                <Button variant="primary">Visualize</Button>
-              </Card.Body>
-            </Card>
+                  <Button variant="primary">Visualize</Button>
+                </Card.Body>
+              </Card>
+            </div>
           </div>
         </Col>
-        <Col md={8} xs="auto" className="mr-4" className="p-5 m-0">
+        <Col md={8} xs={11} className="mr-4" className="p-5 m-0">
           <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
             <ButtonGroup className="mr-2" aria-label="First group">
               <Button className="bg-primary">Morning</Button>
@@ -74,6 +77,9 @@ function App() {
             <Task id={3} label="pizza" completed={true} projectBadge='project' icon={true} dateBadge='Tomorrow at 11:00' />
             <Task id={4} label="elapsed task" date='1999-01-01' dateVariant='danger' />
           </ListGroup>
+          <button type="button" className="btn btn-lg btn-primary rounded-circle" style={{ border:'5px solid', borderRadius:'50%', width:'50px', height:'50px',position: "absolute", bottom: "2rem", right: "2rem" }}>
+            <i className="bi bi-plus-circle-dotted text-light d-flex justify-content-center" style={{ fontSize: '1.5rem' }}></i>
+          </button>
         </Col>
       </Row>
     </Container >
