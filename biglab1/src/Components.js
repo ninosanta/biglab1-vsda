@@ -30,7 +30,7 @@ function VerticalNavbar(props) {
             </div>
         </aside>
     </Col>
-    <Col md={3} className="bg-light align-items-center text-center d-md-block">
+    <Col md={3} className="collapse bg-light align-items-center text-center d-md-block">
     <div className="overflow-auto">
       <div className="d-flex justify-content-center pt-3">
         <Card style={{ width: '18rem' }}>
