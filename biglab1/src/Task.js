@@ -3,7 +3,7 @@ import { ListGroup, Badge, Form } from "react-bootstrap";
 import DayJs from 'react-dayjs';
 
 function Task(props) {
-    const taskId = props.id;
+    const taskId = props.key;
     const [completed, setCompleted] = useState(props.completed || false);
     const [label, setLabel] = useState(props.label || 'New Task');
     const [projectBadge, setbadge] = useState(props.projectBadge || '');
