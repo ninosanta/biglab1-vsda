@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import Task from './Task';
 import VerticalNavbar from './Components';
+import React, { useState } from 'react';
 
 const fakeTasks = [
   { id: 0, label:'task1', projectBadge:'PDS', dateBadge:'Today at 14:00' },
@@ -10,18 +11,17 @@ const fakeTasks = [
   { id: 3, label:'lasagna', projectBadge:'PDS', date:'1999-01-01', dateVariant:'danger' },
 ];
 
+const otherFilters = ['Morning','Afternoon','Evening','Night'];
 function App() {
+  let [open, setOpen] = useState(false);
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Row>
-        <VerticalNavbar/>
-        <Col md={8} xs={11} className="mr-4" className="p-5 m-0">
-          <ButtonToolbar aria-label="Toolbar with button groups" className="justify-content-end">
+        <VerticalNavbar setOpen={setOpen} open={open}/>
+        <Col md={8} xs={open ? '8' : '11'} className="mr-4" className="p-5 m-0">
+          <ButtonToolbar aria-label="Toolbar with button groups" className="d-none d-md-block" style={{position:'absolute', right: "2rem"}}>
             <ButtonGroup className="mr-2" aria-label="First group">
-              <Button className="bg-primary">Morning</Button>
-              <Button className="bg-primary">Afternoon</Button>
-              <Button className="bg-primary">Evening</Button>
-              <Button className="bg-primary">Night</Button>
+              {otherFilters.map(tmp=><Button className="bg-primary">{tmp}</Button>)}
             </ButtonGroup>
           </ButtonToolbar>
           <h1 className="mt-4">Title</h1>
