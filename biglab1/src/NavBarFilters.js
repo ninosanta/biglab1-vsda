@@ -2,16 +2,17 @@ import { Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button }
 
 function NavBarFilters(props) {
     return (
-        <Nav id="filter-navbar" className="flex-column bg-primary position-fixed text-center" style={{ minHeight: '100%', width: '5rem'}}>
+        <Nav id="filter-navbar" className="flex-column bg-primary position-fixed text-center" style={{ minHeight: '100%', width: '5rem' }}>
             <ButtonGroup vertical className="w-100 pt-5 align-items-center">
                 {props.filters.map(filter => {
                     return <Button
                         id={`filter-${filter.label}`} 
                         key={`filter-${filter.label}`} 
-                        className="p-3 btn-primary" 
+                        className="p-3 btn-primary text-light" 
                         variant="link" 
+                        block
                         onClick={() => {document.getElementById('filter-title').innerText = filter.label;}}>
-                            <i className={`bi bi-${filter.icon} text-light d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
+                            <i className={`bi bi-${filter.icon} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
                     </Button>;
                 })}
                 
@@ -28,10 +29,10 @@ function NavBarFilters(props) {
                         </Popover.Content>
                     </Popover>
                 }>
-                    <Button id="search" key="search" className="p-3 btn-primary w-100" variant="link"><i className="bi bi-search text-light d-flex justify-content-center" aria-label="Search" style={{ fontSize: '1.5rem' }}></i></Button>
+                    <Button id="search" key="search" className="p-3 btn-primary text-light" variant="link" block><i className="bi bi-search d-flex justify-content-center" aria-label="Search" style={{ fontSize: '1.5rem' }}></i></Button>
                 </OverlayTrigger>
                 
-                <Button id="options" key="options" className="p-3 btn-primary w-100" variant="link"><i className="bi bi-three-dots text-light d-flex justify-content-center" aria-label="Options" style={{ fontSize: '1.5rem' }}></i></Button>
+                <Button id="options" key="options" className="p-3 btn-primary  text-light" variant="link" block><i className="bi bi-three-dots d-flex justify-content-center" aria-label="Options" style={{ fontSize: '1.5rem' }}></i></Button>
             </ButtonGroup>
 
             <div style={{ position: "absolute", bottom: "2rem" }} className="p-0">

@@ -5,8 +5,8 @@ import img2 from './foto2.jpeg';
 
 function NavBarProjects(props) {
     return (
-        <Col id="projects-navbar" className="overflow-auto" style={{ minHeight: '100vh'}}>
-            <div className="d-flex justify-content-center pt-3">
+        <Col id="projects-navbar" className="overflow-auto p-3" style={{ minHeight: '100vh'}}>
+            <div className="d-flex justify-content-center pb-3">
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={img} />
                     <Card.Body>
@@ -18,7 +18,7 @@ function NavBarProjects(props) {
                     </Card.Body>
                 </Card>
             </div>
-            <div className="d-flex justify-content-center pt-3">
+            <div className="d-flex justify-content-center pb-3">
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={img2} />
                     <Card.Body>

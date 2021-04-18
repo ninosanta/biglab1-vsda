@@ -29,44 +29,51 @@ function App() {
 
   return (
     <Container fluid={true} className="pe-3 m-0">
-      <Row className="collapse d-block d-md-none bg-primary"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
-      <Collapse in={open}>
-        <Row id="mobile-filter-navbar" className="flex-column bg-primary position-fixed text-center" style={{ minHeight: '100%', width: '5rem'}}>
+      <Col className="p-0 m-0">
+        <Row className="d-block d-md-none bg-primary"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
+        <Row id="mobile-filter-navbar" className="flex-column bg-primary position-fixed text-center w-100">
+          <Collapse in={open}>
             <ButtonGroup vertical className="w-100 pt-5 align-items-center">
-                {filters.map(filter => {
-                    return <Button
-                        id={`filter-${filter.label}`} 
-                        key={`filter-${filter.label}`} 
-                        className="p-3 btn-primary" 
-                        variant="link" 
-                        onClick={() => {document.getElementById('filter-title').innerText = filter.label;}}>
-                            <i className={`bi bi-${filter.icon} text-light d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
-                    {filter.label}</Button>;
-                })}
-                
-                <Button id="options" key="options" className="p-3 btn-primary w-100" variant="link"><i className="bi bi-three-dots text-light d-flex justify-content-center" aria-label="Options" style={{ fontSize: '1.5rem' }}></i></Button>
+              {filters.map(filter => {
+                  return <Button
+                      id={`filter-${filter.label}`} 
+                      key={`filter-${filter.label}`} 
+                      className="p-3 btn-primary text-light d-inline" 
+                      onClick={() => {document.getElementById('filter-title').innerText = filter.label;}}>
+                          <i className={`bi bi-${filter.icon} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
+                      {filter.label}
+                    </Button>;
+              })}
+              <Button id="options" key="options" className="p-3 btn-primary text-light d-inline" block variant="link"><i className="bi bi-three-dots d-flex justify-content-center" aria-label="Options" style={{ fontSize: '1.5rem' }}></i>Options</Button>
             </ButtonGroup>
-          </Row>
-        </Collapse>
-      <Row>
-        <Col md={1} className="collapse d-md-block bg-light align-items-center text-center p-0"><NavBarFilters filters={filters}/></Col>
-        <Col md={3} className="collapse d-md-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
-        <Col className="mr-4" className="p-5 m-0">
-          <ButtonToolbar aria-label="Toolbar with button groups" className="d-none d-md-block" style={{position:'absolute', right: "2rem"}}>
-            <ButtonGroup className="mr-2" aria-label="First group">
-              {otherFilters.map(tmp=><Button className="bg-primary">{tmp}</Button>)}
-            </ButtonGroup>
-          </ButtonToolbar>
-          <h1 id='filter-title' className="mt-4">All</h1>
-          <ListGroup variant="flush">{
-            fakeTasks.map((task)=>
-              <Task id={task.id} label={task.label}
-              projectBadge={task.projectBadge} completed={task.completed === 'true'}
-              dateBadge={task.dateBadge} date={task.date} icon={task.icon}
-              dateVariant={task.dateVariant} />)}
-          </ListGroup>
-        </Col>
-      </Row>
+          </Collapse>
+        </Row>
+        <Row>
+          <Col md={1} className="collapse d-md-block bg-light align-items-center text-center p-0"><NavBarFilters filters={filters}/></Col>
+          <Col md={3} className="collapse d-md-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
+          <Col className="mr-4" className="p-5 m-0">
+            <Row>
+              <Col xs={6} md={5}>
+                <h1 id='filter-title' className="mt-4">All</h1>
+              </Col>
+              <Col>
+                <ButtonToolbar aria-label="Toolbar with button groups" style={{position:'absolute', right: "2rem"}}>
+                  <ButtonGroup className="mr-2" aria-label="First group">
+                    {otherFilters.map(tmp => <Button key={`filter-${tmp}`} className="bg-primary">{tmp}</Button>)}
+                  </ButtonGroup>
+                </ButtonToolbar>
+              </Col>
+            </Row>
+            <ListGroup variant="flush">{
+              fakeTasks.map((task)=>
+                <Task id={task.id} key={`task-obj-${task.id}`} label={task.label}
+                projectBadge={task.projectBadge} completed={task.completed === 'true'}
+                dateBadge={task.dateBadge} date={task.date} icon={task.icon}
+                dateVariant={task.dateVariant} />)}
+            </ListGroup>
+          </Col>
+        </Row>
+      </Col>
       <Button className="btn btn-lg btn-primary position-fixed rounded-circle" style={{ width: '3.5rem', height: '3.5rem', bottom: "2rem", right: "2rem" }}>
         <i className="bi bi-plus-circle-dotted text-light d-flex justify-content-center" style={{ fontSize: '2rem' }}></i>
       </Button>
