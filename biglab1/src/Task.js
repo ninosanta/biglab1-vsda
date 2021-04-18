@@ -15,7 +15,7 @@ function Task(props) {
     const [date, setDateBadge] = useState(props.date || '');
     const [dateVariant, setDateVariant] = useState(props.dateVariant || 'dark'); // !! date variant must change based on the date
     return (
-        <ListGroup.Item id={`task-${taskId}`} className="d-flex w-100 justify-content-between riga.hov" action onClick={()=>{console.log("task clicked")}}>
+        <ListGroup.Item id={`task-${taskId}`} key={`task-${taskId}`} className="d-flex w-100 justify-content-between riga.hov" action>
             <Form>
                 <Form.Check id={`task-${taskId}-checkbox`}>
                     <Form.Check.Input type='checkbox' checked={completed} onChange={() => setCompleted(!completed)}/> {/*isInvalid to make it red*/}

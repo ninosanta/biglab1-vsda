@@ -3,6 +3,7 @@ import { Container, Row, Col, ListGroup, ButtonGroup, Button, ButtonToolbar } fr
 import Task from './Task';
 import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
+import NavBarMobile from './NavBarMobile';
 import React, { useState } from 'react';
 
 const fakeTasks = [
@@ -17,6 +18,7 @@ function App() {
   let [open, setOpen] = useState(false);
   return (
     <Container fluid={true} className="pe-3 m-0">
+      <Row><NavBarMobile setOpen={setOpen} open={open}/></Row>
       <Row>
         <NavBarFilters setOpen={setOpen} open={open}/>
         <NavBarProjects setOpen={setOpen} open={open}/>
@@ -29,17 +31,17 @@ function App() {
           <h1 id='filter-title' className="mt-4">Title</h1>
           <ListGroup variant="flush">{
             fakeTasks.map((task)=>
-              <Task id={task.id} key={task.id} label={task.label}
+              <Task id={task.id} label={task.label}
               projectBadge={task.projectBadge} completed={task.completed === 'true'}
               dateBadge={task.dateBadge} date={task.date} icon={task.icon}
               dateVariant={task.dateVariant} />)}
           </ListGroup>
-          <button type="button" className="btn btn-lg btn-primary rounded-circle" style={{ border: '5px solid', borderRadius: '50%', width: '50px', height: '50px', position: "absolute", bottom: "2rem", right: "2rem" }}>
-            <i className="bi bi-plus-circle-dotted text-light d-flex justify-content-center" style={{ fontSize: '1.5rem' }}></i>
-          </button>
         </Col>
       </Row>
-    </Container >
+      <Button className="btn btn-lg btn-primary position-fixed rounded-circle" style={{ width: '3.5rem', height: '3.5rem', bottom: "2rem", right: "2rem" }}>
+        <i className="bi bi-plus-circle-dotted text-light d-flex justify-content-center" style={{ fontSize: '2rem' }}></i>
+      </Button>
+    </Container>
   );
 }
 

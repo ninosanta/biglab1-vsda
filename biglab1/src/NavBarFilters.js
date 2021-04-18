@@ -10,12 +10,9 @@ const filters = [
 
 function NavBarFilters(props) {
     return (
-        <Collapse in={props.open}>
-            <Col md={1} xs={1} className="p-0 d-md-block">
-                <aside className="bg-primary align-items-center text-center mx-auto" id="filter-sidebar" style={{ minHeight: '100vh', minWidth: '100%' }}>
-                    <div className="d-block d-md-none d-lg-none d-xl-none">
-                        <Button onClick={() => props.setOpen(old => !old)} id="home" className="mt-4 p-0" variant="link"><i className="bi bi-list-nested text-dark" aria-label="Home" style={{ fontSize: '1.5rem' }}></i></Button>
-                    </div>
+        <Collapse id="filter-navbar" in={props.open}>
+            <Col md={1} xs={1} className="p-0 d-md-block align-items-center">
+                <aside className="bg-primary position-fixed text-center m-0 p-0" style={{ minHeight: '100vh' }}>
                     <div>
                         <ButtonGroup id='filters' className="m-0 w-100 pt-5" vertical>
                             {filters.map(filter => {

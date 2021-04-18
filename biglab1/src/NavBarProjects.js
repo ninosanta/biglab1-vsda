@@ -5,7 +5,7 @@ import img2 from './foto2.jpeg';
 
 function NavBarProjects(props) {
     return (
-        <Collapse in={props.open}>
+        <Collapse id="projects-navbar" in={props.open}>
             <Col md={3} xs={3} className="collapse bg-light align-items-center text-center d-md-block">
                 <div className="overflow-auto">
                     <div className="d-flex justify-content-center pt-3">
