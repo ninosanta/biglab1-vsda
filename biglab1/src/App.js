@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import Task from './Task';
-import VerticalNavbar from './Components';
+import NavBarFilters from './NavBarFilters';
+import NavBarProjects from './NavBarProjects';
 import React, { useState } from 'react';
 
 const fakeTasks = [
@@ -17,18 +18,19 @@ function App() {
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Row>
-        <VerticalNavbar setOpen={setOpen} open={open}/>
+        <NavBarFilters setOpen={setOpen} open={open}/>
+        <NavBarProjects setOpen={setOpen} open={open}/>
         <Col md={8} xs={open ? '8' : '11'} className="mr-4" className="p-5 m-0">
           <ButtonToolbar aria-label="Toolbar with button groups" className="d-none d-md-block" style={{position:'absolute', right: "2rem"}}>
             <ButtonGroup className="mr-2" aria-label="First group">
               {otherFilters.map(tmp=><Button className="bg-primary">{tmp}</Button>)}
             </ButtonGroup>
           </ButtonToolbar>
-          <h1 className="mt-4">Title</h1>
+          <h1 id='filter-title' className="mt-4">Title</h1>
           <ListGroup variant="flush">{
             fakeTasks.map((task)=>
-              <Task key={task.id} label={task.label}
-              projectBadge={task.projectBadge} completed={task.completed}
+              <Task id={task.id} key={task.id} label={task.label}
+              projectBadge={task.projectBadge} completed={task.completed === 'true'}
               dateBadge={task.dateBadge} date={task.date} icon={task.icon}
               dateVariant={task.dateVariant} />)}
           </ListGroup>
