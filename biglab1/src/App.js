@@ -22,19 +22,19 @@ const filters = [
   {label: "Private", icon: 'eye-slash'},
 ];
 
-const otherFilters = ['Morning','Afternoon','Evening','Night'];
+const otherFilters = ['All','Morning','Afternoon','Evening','Night'];
 
 function App() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Col className="p-0 m-0">
         <Row className="d-block d-md-none bg-primary"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
         <Row>
-          <Col md={1} className="d-none d-md-block bg-light align-items-center text-center p-0"><NavBarFilters filters={filters}/></Col>
-          <Col md={3} className="d-none d-md-block bg-light align-items-center text-center"><Collapse in={!open}><NavBarProjects open={open} setOpen={setOpen} filters={filters}/></Collapse></Col>
-          <Col className="p-5 m-0 mr-4">
+          <Col md={1} className="bg-light align-items-center text-center p-0"><NavBarFilters open={true} filters={filters}/></Col>
+          <Col md={3} className="d-none d-md-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
+          <Col className="p-5 m-0 mr-md-4">
             <Row className="d-flex flex-row-reverse">
               <ButtonToolbar className="d-none d-sm-block d-lg-block" aria-label="Toolbar with button groups">
                 <ButtonGroup className="mr-2" aria-label="First group">
@@ -53,10 +53,17 @@ function App() {
             </Row>
             <ListGroup variant="flush">{
               fakeTasks.map((task)=>
-                <Task id={task.id} key={`task-obj-${task.id}`} label={task.label}
-                projectBadge={task.projectBadge} completed={task.completed === 'true'}
-                dateBadge={task.dateBadge} date={task.date} icon={task.icon}
-                dateVariant={task.dateVariant} />)}
+                <Task 
+                  id={task.id} 
+                  key={`task-obj-${task.id}`} 
+                  label={task.label} 
+                  projectBadge={task.projectBadge} 
+                  completed={task.completed === 'true'} 
+                  dateBadge={task.dateBadge} 
+                  date={task.date} 
+                  icon={task.icon}
+                  dateVariant={task.dateVariant}
+                />)}
             </ListGroup>
           </Col>
         </Row>
