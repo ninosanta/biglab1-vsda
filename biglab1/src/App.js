@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
+import './App.css';
+import { Container, Row, Col, Collapse, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import Task from './Task';
 import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
@@ -15,20 +16,21 @@ const fakeTasks = [
 
 const otherFilters = ['Morning','Afternoon','Evening','Night'];
 function App() {
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Row><NavBarMobile setOpen={setOpen} open={open}/></Row>
       <Row>
-        <NavBarFilters setOpen={setOpen} open={open}/>
-        <NavBarProjects setOpen={setOpen} open={open}/>
-        <Col md={8} xs={open ? '8' : '11'} className="mr-4" className="p-5 m-0">
+        <Col md={1} className="collapse d-md-block bg-light align-items-center text-center p-0"><NavBarFilters setOpen={setOpen} open={open}/></Col>
+        <Col md={3} className="collapse d-md-block bg-light align-items-center text-center"><NavBarProjects setOpen={setOpen} open={open}/></Col>
+        <Col className="mr-4" className="p-5 m-0">
           <ButtonToolbar aria-label="Toolbar with button groups" className="d-none d-md-block" style={{position:'absolute', right: "2rem"}}>
             <ButtonGroup className="mr-2" aria-label="First group">
               {otherFilters.map(tmp=><Button className="bg-primary">{tmp}</Button>)}
             </ButtonGroup>
           </ButtonToolbar>
-          <h1 id='filter-title' className="mt-4">Title</h1>
+          <h1 id='filter-title' className="mt-4">All</h1>
           <ListGroup variant="flush">{
             fakeTasks.map((task)=>
               <Task id={task.id} label={task.label}

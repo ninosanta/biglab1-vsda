@@ -1,4 +1,4 @@
-import { Collapse, Row, Col, Image, ButtonGroup, Button } from 'react-bootstrap';
+import { Collapse, Row, Button } from 'react-bootstrap';
 
 const filters = [
     {label: "All", icon: 'inbox'},
@@ -10,8 +10,8 @@ const filters = [
 
 function NavBarMobile(props) {
     return (
-        <Collapse id="mobile-navbar" in={!props.open}>
-            <Row className="p-0 d-block d-md-none d-lg-none d-xl-none bg-primary align-items-center text-center mx-auto" style={{ minWidth: '100%' }}>
+        <Collapse in={!props.open}>
+            <Row id="mobile-navbar" className="p-0 d-block d-md-none d-lg-none d-xl-none bg-primary align-items-center text-center mx-auto" style={{ minWidth: '100%' }}>
                 <div className="d-block d-md-none d-lg-none d-xl-none">
                     <Button onClick={() => props.setOpen(old => !old)} id="home" className="mt-4 p-0" variant="link"><i className="bi bi-list-nested text-dark" aria-label="Home" style={{ fontSize: '1.5rem' }}></i></Button>
                 </div>

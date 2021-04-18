@@ -49,3 +49,7 @@
 .tooltip.tooltip-scroll ::-webkit-scrollbar-button {
   background-color: #F1F1F1;
 }
+
+#dropdown-button-search::after{
+  display: none;
+}
