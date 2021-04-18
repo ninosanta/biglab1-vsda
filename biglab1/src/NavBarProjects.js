@@ -1,4 +1,4 @@
-import { Collapse, Col, Button, Card } from 'react-bootstrap';
+import { Collapse, Button, Card } from 'react-bootstrap';
 import img from './foto.png';
 import img2 from './foto2.jpeg';
 
