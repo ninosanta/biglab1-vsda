@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Container, Row, Col, Collapse, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
+import { Container, Row, Col, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import Task from './Task';
 import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
@@ -14,16 +14,22 @@ const fakeTasks = [
   { id: 3, label:'lasagna', projectBadge:'PDS', date:'1999-01-01', dateVariant:'danger' },
 ];
 
+const filters = [
+  {label: "All", icon: 'inbox'},
+  {label: "Important", icon: 'bookmark-star'},
+  {label: "Today's", icon: 'sunset'},
+  {label: "Next week's", icon: 'calendar-week'},
+  {label: "Private", icon: 'eye-slash'},
+]
+
 const otherFilters = ['Morning','Afternoon','Evening','Night'];
 function App() {
-  const [open, setOpen] = useState(true);
-  
   return (
     <Container fluid={true} className="pe-3 m-0">
-      <Row><NavBarMobile setOpen={setOpen} open={open}/></Row>
+      <Row className="collapse d-block d-md-none bg-primary"><NavBarMobile filters={filters}/></Row>
       <Row>
-        <Col md={1} className="collapse d-md-block bg-light align-items-center text-center p-0"><NavBarFilters setOpen={setOpen} open={open}/></Col>
-        <Col md={3} className="collapse d-md-block bg-light align-items-center text-center"><NavBarProjects setOpen={setOpen} open={open}/></Col>
+        <Col md={1} className="collapse d-md-block bg-light align-items-center text-center p-0"><NavBarFilters filters={filters}/></Col>
+        <Col md={3} className="collapse d-md-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
         <Col className="mr-4" className="p-5 m-0">
           <ButtonToolbar aria-label="Toolbar with button groups" className="d-none d-md-block" style={{position:'absolute', right: "2rem"}}>
             <ButtonGroup className="mr-2" aria-label="First group">
