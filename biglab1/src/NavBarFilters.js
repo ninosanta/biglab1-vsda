@@ -2,7 +2,7 @@ import { Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button }
 
 function NavBarFilters(props) {
     return (
-        <Nav id="filter-navbar" className="flex-column bg-primary position-fixed text-center" style={{ minHeight: '100%', width: '5rem' }}>
+        <Nav id="filter-navbar" className="d-flex flex-column bg-primary position-fixed text-center" style={{ minHeight: '100%', width: '5rem' }}>
             <ButtonGroup vertical className="w-100 pt-5 align-items-center">
                 {props.filters.map(filter => {
                     return <Button
@@ -24,7 +24,7 @@ function NavBarFilters(props) {
                                 autoFocus
                                 className="mx-2 w-auto"
                                 placeholder="Type to filter..."
-                                onChange={(e) => {if(e.target.value !== '')document.getElementById('filter-title').innerText = e.target.value;}}
+                                onChange={(e) => {if(e.target.value.length >= 1 && e.target.value.length <= 15)document.getElementById('filter-title').innerText = e.target.value;}}
                             />
                         </Popover.Content>
                     </Popover>

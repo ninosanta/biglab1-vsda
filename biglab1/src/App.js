@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Container, Row, Col, Collapse, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
+import { Container, Row, Col, Collapse, Dropdown, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import Task from './Task';
 import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
@@ -25,44 +25,31 @@ const filters = [
 const otherFilters = ['Morning','Afternoon','Evening','Night'];
 
 function App() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Col className="p-0 m-0">
         <Row className="d-block d-md-none bg-primary"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
-        <Row id="mobile-filter-navbar" className="flex-column bg-primary position-fixed text-center w-100">
-          <Collapse in={open}>
-            <ButtonGroup vertical className="w-100 pt-5 align-items-center">
-              {filters.map(filter => {
-                  return <Button
-                      id={`filter-${filter.label}`} 
-                      key={`filter-${filter.label}`} 
-                      className="p-3 btn-primary text-light d-inline" 
-                      onClick={() => {document.getElementById('filter-title').innerText = filter.label;}}>
-                          <i className={`bi bi-${filter.icon} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
-                      {filter.label}
-                    </Button>;
-              })}
-              <Button id="options" key="options" className="p-3 btn-primary text-light d-inline" block variant="link"><i className="bi bi-three-dots d-flex justify-content-center" aria-label="Options" style={{ fontSize: '1.5rem' }}></i>Options</Button>
-            </ButtonGroup>
-          </Collapse>
-        </Row>
         <Row>
-          <Col md={1} className="collapse d-md-block bg-light align-items-center text-center p-0"><NavBarFilters filters={filters}/></Col>
-          <Col md={3} className="collapse d-md-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
-          <Col className="mr-4" className="p-5 m-0">
-            <Row>
-              <Col xs={6} md={5}>
-                <h1 id='filter-title' className="mt-4">All</h1>
-              </Col>
-              <Col>
-                <ButtonToolbar aria-label="Toolbar with button groups" style={{position:'absolute', right: "2rem"}}>
-                  <ButtonGroup className="mr-2" aria-label="First group">
-                    {otherFilters.map(tmp => <Button key={`filter-${tmp}`} className="bg-primary">{tmp}</Button>)}
-                  </ButtonGroup>
-                </ButtonToolbar>
-              </Col>
+          <Col md={1} className="d-none d-md-block bg-light align-items-center text-center p-0"><NavBarFilters filters={filters}/></Col>
+          <Col md={3} className="d-none d-md-block bg-light align-items-center text-center"><Collapse in={!open}><NavBarProjects open={open} setOpen={setOpen} filters={filters}/></Collapse></Col>
+          <Col className="p-5 m-0 mr-4">
+            <Row className="d-flex flex-row-reverse">
+              <ButtonToolbar className="d-none d-sm-block d-lg-block" aria-label="Toolbar with button groups">
+                <ButtonGroup className="mr-2" aria-label="First group">
+                  {otherFilters.map(tmp => <Button key={`otherfilter-${tmp}`} variant="primary">{tmp}</Button>)}
+                </ButtonGroup>
+              </ButtonToolbar>
+              <Dropdown className="d-block d-sm-none d-lg-none">
+                <Dropdown.Toggle id="dropdown-other-filters" variant="primary">Daytime filters</Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {otherFilters.map(tmp => <Dropdown.Item key={`otherfilter-${tmp}`}>{tmp}</Dropdown.Item>)}
+                </Dropdown.Menu>
+              </Dropdown>
+            </Row>
+            <Row className="d-flex flex-row">
+              <h1 id='filter-title' className="mt-4">All</h1>
             </Row>
             <ListGroup variant="flush">{
               fakeTasks.map((task)=>
