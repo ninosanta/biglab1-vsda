@@ -1,11 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Container, Row, Col, Collapse, Dropdown, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, ListGroup, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import Task from './Task';
 import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
 import NavBarMobile from './NavBarMobile';
 import React, { useState } from 'react';
+import CollapseBar from './CollapseBar'
 
 const fakeTasks = [
   { id: 0, label:'task1', projectBadge:'PDS', dateBadge:'Today at 14:00' },
@@ -30,10 +31,11 @@ function App() {
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Col className="p-0 m-0">
-        <Row className="d-block d-md-none bg-primary"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
+        <Row className="d-block d-lg-none bg-primary"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
         <Row>
-          <Col md={1} className="bg-light align-items-center text-center p-0"><NavBarFilters open={true} filters={filters}/></Col>
-          <Col md={3} className="d-none d-md-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
+          {<NavBarFilters filters={filters}/>}
+          {<CollapseBar open={open} filters={filters}/>}
+          <Col md={3} className="d-none d-lg-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
           <Col className="p-5 m-0 mr-md-4">
             <Row className="d-flex flex-row-reverse">
               <ButtonToolbar className="d-none d-sm-block d-lg-block" aria-label="Toolbar with button groups">

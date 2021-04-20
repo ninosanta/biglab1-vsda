@@ -3,7 +3,7 @@ import { Nav, Button, Form, FormControl, Image } from 'react-bootstrap';
 function NavBarMobile(props) {
     return (
         <Nav id="mobile-navbar" bg="primary" className="d-flex flex-row justify-content-between align-items-center p-1 w-100">
-            <Button onClick={() => {props.setOpen(!props.open)}}><i className="bi bi-list-nested text-light" aria-label="Home" style={{ fontSize: '1.5rem' }}></i></Button>
+            <Button onClick={() => {props.setOpen(old => !old)}}><i className="bi bi-list-nested text-light" aria-label="Home" style={{ fontSize: '1.5rem' }}></i></Button>
             <div className="d-flex flex-row">
                 <Form className="mr-3" inline>
                     <FormControl
