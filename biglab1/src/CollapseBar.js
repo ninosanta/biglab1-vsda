@@ -37,7 +37,7 @@ function CollapseBar(props) {
                         <Button id="options2" key="options2" className="pt-3 pb-3 btn-light  text-dark" variant="link" block><i className="bi bi-three-dots d-flex justify-content-center" aria-label="Options" style={{ fontSize: '1.5rem' }}></i></Button>
                     </ButtonGroup>
 
-                    <div style={{ position: "absolute", bottom: "2rem" }} className="pe-auto">
+                    <div style={{ position: "absolute", bottom: "5rem" }} className="pe-auto">
                         <Image src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" roundedCircle style={{ width: '65%', height: 'auto' }}></Image>
                     </div>
                 </Nav>
