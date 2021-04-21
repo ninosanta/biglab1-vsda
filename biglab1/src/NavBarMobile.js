@@ -6,7 +6,7 @@ function NavBarMobile(props) {
         <Navbar.Brand>
             <Image className="ml-3" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" roundedCircle style={{ height: '2rem', width: '2rem' }}></Image>
         </Navbar.Brand>
-        <Navbar.Toggle >
+        <Navbar.Toggle style={{border:'none'}} >
             <i className="bi bi-list-nested text-light" aria-label="Home" style={{ fontSize: '1.5rem' }}></i>
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
