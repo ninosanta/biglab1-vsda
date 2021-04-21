@@ -12,29 +12,40 @@ function Task(props) {
     const [date, setDateBadge] = useState(props.date || '');
     const [dateVariant, setDateVariant] = useState(props.dateVariant || 'dark'); // !! date variant must change based on the date
     return (
-        <Row>
+        <Row >
             <ListGroup.Item id={`task-${taskId}`} key={`task-${taskId}`}
                             className="task-list-group-item d-flex w-100 justify-content-between riga.hov" action>
-                <Col sm={5}>
-                    <Form>
-                        <Form.Check id={`task-${taskId}-checkbox`}>
-                            <Form.Check.Input type='checkbox'
-                                              checked={completed} onChange={() => setCompleted(!completed)}/> {/*isInvalid to make it red*/}
-                            <Form.Check.Label> {label} </Form.Check.Label>
-                        </Form.Check>
-                    </Form>
-                </Col>
                 <Col>
-                    <Badge id={`task-${taskId}-project`} pill variant="info">{projectBadge}</Badge>
+                    <Row>
+                        <Col sm={5}>
+                            <Form className="pb-3">
+                                <Form.Check id={`task-${taskId}-checkbox`}>
+                                    <Form.Check.Input type='checkbox'
+                                                    checked={completed} onChange={() => setCompleted(!completed)}/> {/*isInvalid to make it red*/}
+                                    <Form.Check.Label> {label} </Form.Check.Label>
+                                    <span className='ml-3' style={{opacity:'0.6'}} id={`task-${taskId}-icon`}>{icon}</span>
+                                </Form.Check>
+                                
+                            </Form>
+                            
+                        </Col>
+                        <Col>
+                            <Row>
+                            
+                                <Col sm={5}>
+                                    <Badge  id={`task-${taskId}-project`} pill variant="info">{projectBadge}</Badge>
+                                </Col>
+                                <Col>        
+                                    <Badge id={`task-${taskId}-date`} variant={dateVariant}>
+                                        <DayJS format="MMMM D, YYYY h:mm A">{ date }</DayJS>
+                                    </Badge>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
                 </Col>
-                <Col sm={1}>
-                    <div id={`task-${taskId}-icon`}>{icon}</div>
-                </Col>
-                <Col>
-                    <Badge id={`task-${taskId}-date`} variant={dateVariant}>
-                        <DayJS format="MMMM D, YYYY h:mm A">{ date }</DayJS>
-                    </Badge>
-                </Col>
+
+
                 <TaskControls taskId={props.id} deleteTask={props.deleteTask}/>
             </ListGroup.Item>
         </Row>
