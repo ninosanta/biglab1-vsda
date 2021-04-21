@@ -36,8 +36,8 @@ function NavBarFilters(props) {
                     <Button id="options" key="options" className="pt-3 pb-3 btn-primary  text-light" variant="link" block><i className="bi bi-three-dots d-flex justify-content-center" aria-label="Options" style={{ fontSize: '1.5rem' }}></i></Button>
                 </ButtonGroup>
 
-                <div style={{ position: "absolute", bottom: "2rem" }} className="pe-auto">
-                    <Image src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" roundedCircle style={{ width: '65%', height: 'auto' }}></Image>
+                <div className="pe-auto">
+                    <Image src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" roundedCircle style={{ marginTop: '5rem', width: '3em', height: '3em' }}></Image>
                 </div>
             </Nav>
         </Col>);

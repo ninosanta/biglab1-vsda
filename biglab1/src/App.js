@@ -31,7 +31,7 @@ function App() {
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Col className="p-0 m-0">
-        <Row className="d-block d-lg-none bg-primary"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
+        <Row className="d-block d-lg-none bg-primary mb-5"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
         <Row>
           {<NavBarFilters filters={filters}/>}
           {<CollapseBar open={open} filters={filters}/>}

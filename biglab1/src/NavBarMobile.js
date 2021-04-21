@@ -1,4 +1,4 @@
-import { Nav, Navbar, Button, Form, FormControl, Image } from 'react-bootstrap';
+import { Nav, Navbar, Button, Form, FormControl, Image, Row, Col} from 'react-bootstrap';
 
 function NavBarMobile(props) {
     return (
@@ -11,17 +11,52 @@ function NavBarMobile(props) {
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-            <Nav.Link id="filter-all" className="pl-3  btn-primary " title="All"><i className="bi bi-inbox text-light d-flex justify-content-left" aria-label="All" style={{ fontSize: '1.5em' }}></i> All</Nav.Link>
-            <Nav.Link id="filter-important" className="pl-3 btn-primary" variant="link" title="Important"><i className="bi bi-bookmark-star text-light d-flex justify-content-left" aria-label="Important" style={{ fontSize: '1.5rem' }}></i></Nav.Link>
-            <Nav.Link id="filter-today" className="pl-3 btn-primary" title="Today"><i className="bi bi-sunset text-light d-flex justify-content-left" aria-label="Today" style={{ fontSize: '1.5rem' }}></i></Nav.Link>
-            <Nav.Link id="filter-week" className="pl-3 btn-primary" title="Week"><i className="bi bi-calendar-week text-light d-flex justify-content-left" aria-label="This week" style={{ fontSize: '1.5rem' }}></i></Nav.Link>
-            <Nav.Link id="filter-private" className="pl-3 btn-primary" title="Private"><i className="bi bi-eye-slash text-light d-flex justify-content-left" aria-label="Private" style={{ fontSize: '1.5rem' }}></i></Nav.Link>
-            <Nav.Link id="filter-search" className="pl-3 btn-primary" title="Search"><i className="bi bi-search text-light d-flex justify-content-left" aria-label="Search" style={{ fontSize: '1.5rem' }}></i>
-            <Form inline>
-            <FormControl type="text" placeholder="Type to filter..." className="mr-sm-2 w-50" />
-            </Form>
+            <Nav.Link id="filter-all" className="pl-3  btn-primary text-light" style={{ fontSize: '1.5em' }} title="All">
+                <Row>
+                    <Col md={1} xs={2}><i className="bi bi-inbox"></i></Col>
+                    <Col>All</Col>
+                </Row>
             </Nav.Link>
-            <Nav.Link id="options" className="pl-3 btn-primary w-100" variant="link"  title="Options"><i className="bi bi-three-dots text-light d-flex justify-content-left" aria-label="Options" style={{ fontSize: '1.5rem' }}></i></Nav.Link>
+            <Nav.Link id="filter-important" className="pl-3  btn-primary text-light" style={{ fontSize: '1.5em' }} title="Important">
+                <Row>
+                    <Col md={1} xs={2}><i className="bi bi-bookmark-star"></i></Col>
+                    <Col>Important</Col>
+                </Row>
+            </Nav.Link>
+            <Nav.Link id="filter-today" className="pl-3  btn-primary text-light" style={{ fontSize: '1.5em' }} title="Today">
+                <Row>
+                    <Col md={1} xs={2}><i className="bi bi-sunset"></i></Col>
+                    <Col>Today</Col>
+                </Row>
+            </Nav.Link>
+            <Nav.Link id="filter-week" className="pl-3  btn-primary text-light" style={{ fontSize: '1.5em' }} title="Week">
+                <Row>
+                    <Col md={1} xs={2}><i className="bi bi-calendar-week"></i></Col>
+                    <Col>Week</Col>
+                </Row>
+            </Nav.Link>
+            <Nav.Link id="filter-private" className="pl-3  btn-primary text-light" style={{ fontSize: '1.5em' }} title="Private">
+                <Row>
+                    <Col md={1} xs={2}><i className="bi bi-eye-slash"></i></Col>
+                    <Col>Private</Col>
+                </Row>
+            </Nav.Link>
+            <Nav.Link id="filter-search" className="pl-3  btn-primary text-light" style={{ fontSize: '1.5em' }} title="Search">
+                <Row>
+                    <Col md={1} xs={2}><i className="bi bi-search"></i></Col>
+                    <Col>
+                        <Form inline>
+                            <FormControl type="text" placeholder="Type to filter..." className="mr-sm-2 w-sm-75" />
+                        </Form>
+                    </Col>
+                </Row>
+            </Nav.Link>
+            <Nav.Link id="options" className="pl-3  btn-primary text-light" style={{ fontSize: '1.5em' }} variant="link"  title="Options">
+                <Row>
+                    <Col md={1} xs={2}><i className="bi bi-three-dots"></i></Col> 
+                    <Col>Options</Col>
+                </Row>
+            </Nav.Link>
             
             </Nav>
             
