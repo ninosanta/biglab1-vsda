@@ -27,14 +27,34 @@ const otherFilters = ['All','Morning','Afternoon','Evening','Night'];
 
 function App() {
   const [open, setOpen] = useState(false);
+  const [display, setDisplay] = useState("All");
+  const [tasks, setTasks] = useState(fakeTasks);
 
+  const filterFunct = (display) => {
+    switch(display){
+        case("All"):
+            return;
+        case("Important"):
+            setTasks( oldTasks => oldTasks.filter( task => task.dateVariant == "danger"));
+            break;
+        case("Today's"):
+            //setTasks( oldTasks => oldTasks.filter( task => isToday(task)));
+            break; 
+        case("Next week's"):
+            //setTasks( oldTasks => oldTasks.filter( task => isNextWeek(task)));
+            break; 
+        case("Private"):
+            setTasks( oldTasks => oldTasks.filter( task => task.icon == true)); 
+            break;  
+    }
+}
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Col className="p-0 m-0">
         <Row className="d-block d-lg-none bg-primary mb-5"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
         <Row>
-          {<NavBarFilters filters={filters}/>}
-          {<CollapseBar open={open} filters={filters}/>}
+          {<NavBarFilters display={display} setDisplay={setDisplay} filterFunct={filterFunct} filters={filters}/>}
+          {/*<CollapseBar filters={filters}/>*/}
           <Col md={3} className="d-none d-lg-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
           <Col className="p-5 m-0 mr-md-4">
             <Row className="d-flex flex-row-reverse">
@@ -53,8 +73,7 @@ function App() {
             <Row className="d-flex flex-row">
               <h1 id='filter-title' className="mt-4">All</h1>
             </Row>
-
-            <TasksList tasks={fakeTasks} />
+            <TasksList tasks={tasks} display={display}/>
           </Col>
         </Row>
       </Col>

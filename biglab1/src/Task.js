@@ -3,6 +3,96 @@ import { ListGroup, Badge, Form, Row, Col } from "react-bootstrap";
 import DayJS from 'react-dayjs';
 import {iconDelete, iconPersonSquare, iconEdit} from "./icons";
 
+
+ /** 
+     * Function to check if a date is today. Returns true if the date is today, false otherwise.
+     * @param {*} date the javascript Date to be checked
+    
+function isToday(date){
+    const comparisonTemplate = 'YYYY-MM-DD';
+    const now = DayJS();
+    return date.deadline && (date.deadline.format(comparisonTemplate) === now.format(comparisonTemplate));
+} */
+
+/** 
+ * Function to check if a date is yesterday. Returns true if the date is yesterday, false otherwise.
+ * @param {*} date the javascript Date to be checked
+ 
+function isYesterday(date){
+    const comparisonTemplate = 'YYYY-MM-DD';
+    const yesterday = DayJS().subtract(1, 'day');
+    return date.deadline && (date.deadline.format(comparisonTemplate) === yesterday.format(comparisonTemplate));
+}*/
+
+/** 
+ * Function to check if a date is tomorrow. Returns true if the date is tomorrow, false otherwise.
+ * @param {*} date the javascript Date to be checked
+ 
+ function isTomorrow(date){
+    const comparisonTemplate = 'YYYY-MM-DD';
+    const tomorrow = DayJS().add(1, 'day');
+    return date.deadline && (date.deadline.format(comparisonTemplate) === tomorrow.format(comparisonTemplate));
+}*/
+
+/**
+ * Function to check if a date is in the next week. Returns true if the date is in the next week, false otherwise.
+ * @param {*} date the javascript Date to be checked
+
+ function isNextWeek(date){
+     const tomorrow = DayJS().add(1, 'day');
+     const nextWeek = DayJS().add(7, 'day');
+     const ret = date.deadline && ( !date.deadline.isBefore(tomorrow,'day') && !date.deadline.isAfter(nextWeek,'day') );
+     console.dir(date.deadline);
+     return ret;
+ }
+
+ function formatDeadline(date){
+    if(!date) return '--o--';
+    else if(isToday(date)) {
+        return date.format('[Today at] HH:mm');
+    } else if(isTomorrow(date)) {
+        return date.format('[Tomorrow at] HH:mm');
+    } else if(isYesterday(date)) {
+        return date.format('[Yesterday at] HH:mm');
+    } else {
+        return date.format('dddd DD MMMM YYYY [at] HH:mm');
+    }
+} */
+
+
+function TasksList(props) {
+    const [tasks, setTasks] = useState(props.tasks) ;
+
+    const deleteTask = (id) => {
+        setTasks( oldTask => oldTask.filter(task => task.id !== id) ) ;
+    }
+
+    return (
+
+        <ListGroup variant="flush">
+            {
+                tasks.map( (task) => <
+                    Task
+                    id={task.id}
+                    key={`task-obj-${task.id}`}
+                    label={task.label}
+                    projectBadge={task.projectBadge}
+                    completed={task.completed === 'true'}
+                    dateBadge={task.dateBadge}
+                    date={task.date}
+                    icon={task.icon}
+                    dateVariant={task.dateVariant}
+
+                    deleteTask={deleteTask}
+                />)
+            }
+        </ListGroup>
+    );
+}
+
+
+
+
 function Task(props) {
     const taskId = props.id;
     const [completed, setCompleted] = useState(props.completed || false);
@@ -52,35 +142,7 @@ function Task(props) {
     );
 }
 
-function TasksList(props) {
-    const [tasks, setTasks] = useState(props.tasks) ;
 
-    const deleteTask = (id) => {
-        setTasks( oldTask => oldTask.filter(task => task.id !== id) ) ;
-    }
-
-    return (
-
-        <ListGroup variant="flush">
-            {
-                tasks.map( (task) => <
-                    Task
-                    id={task.id}
-                    key={`task-obj-${task.id}`}
-                    label={task.label}
-                    projectBadge={task.projectBadge}
-                    completed={task.completed === 'true'}
-                    dateBadge={task.dateBadge}
-                    date={task.date}
-                    icon={task.icon}
-                    dateVariant={task.dateVariant}
-
-                    deleteTask={deleteTask}
-                />)
-            }
-        </ListGroup>
-    );
-}
 
 
 function TaskControls(props) {

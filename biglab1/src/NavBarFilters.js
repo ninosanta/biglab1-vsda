@@ -1,6 +1,8 @@
 import {Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button, Col } from 'react-bootstrap';
 
 function NavBarFilters(props) {
+    
+
     return (
         <Col md={1} className="d-none d-lg-block bg-light align-items-center text-center p-0">
             <Nav id="filter-navbar" className="d-flex flex-column bg-primary position-fixed text-center" style={{ minHeight: '100%', width: '5rem' }}>
@@ -12,7 +14,12 @@ function NavBarFilters(props) {
                             className="pt-3 pb-3 btn-primary text-light"
                             variant="link"
                             block
-                            onClick={() => { document.getElementById('filter-title').innerText = filter.label; }}>
+                            onClick={() => {   
+                                             document.getElementById('filter-title').innerText = filter.label; 
+                                             props.setDisplay(filter.label);
+                                             props.filterFunct(filter.label);
+                                            }}
+                            >
                             <i className={`bi bi-${filter.icon} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
                         </Button>;
                     })}
