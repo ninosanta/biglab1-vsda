@@ -15,10 +15,10 @@ function NavBarFilters(props) {
                             variant="link"
                             block
                             onClick={() => {   
-                                             document.getElementById('filter-title').innerText = filter.label; 
-                                             props.setDisplay(filter.label);
-                                             props.filterFunct(filter.label);
-                                            }}
+                                document.getElementById('filter-title').innerText = filter.label; 
+                                props.setDisplay(filter.label);
+                                props.filterFunct(filter.label);
+                            }}
                             >
                             <i className={`bi bi-${filter.icon} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
                         </Button>;
