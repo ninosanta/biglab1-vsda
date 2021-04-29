@@ -9,18 +9,18 @@ import CollapseBar from './CollapseBar';
 import TasksList from "./Task";
 
 const fakeTasks = [
-  { id: 0, description:'task1', project:'PDS', deadline:'2021-04-29 12:00' },
+  { id: 0, description:'task1', important:'true', project:'PDS', deadline:'2021-04-29 12:00' },
   { id: 1, completed:'true', description:'task2', project:'Web Application 1' },
   { id: 2, completed:'true', description:'pizza', private:'true', deadline:'04 12, 2021 8:30' },
   { id: 3, description:'lasagna', project:'Web Application 1', deadline:'1999-01-01'},
 ];
 
 const filters = [
-  {label: "All", icon: 'inbox'},
-  {label: "Important", icon: 'bookmark-star'},
-  {label: "Today's", icon: 'sunset'},
-  {label: "Next week's", icon: 'calendar-week'},
-  {label: "Private", icon: 'eye-slash'},
+  {label: "All", icon: "inbox"},
+  {label: "Important", icon: "bookmark-star"},
+  {label: "Today's", icon: "sunset"},
+  {label: "Next week's", icon: "calendar-week"},
+  {label: "Private", icon: "eye-slash"},
 ];
 
 const otherFilters = ['All','Morning','Afternoon','Evening','Night'];

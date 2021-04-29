@@ -77,6 +77,7 @@ function TasksList(props) {
                         id={task.id}
                         completed={task.completed === 'true'}
                         description={task.description || 'New Task'}
+                        important={task.important === 'true'}
                         project={task.project}
                         private={task.private === 'true'}
                         deadline={task.deadline}
@@ -91,6 +92,7 @@ function Task(props) {
     const taskId = props.id;
     const [taskCompleted, setCompleted] = useState(props.completed);
     const [taskDescription, setDescription] = useState(props.description);
+    const [taskImportant, setImportant] = useState(props.important);
     const [taskProject, setProject] = useState(props.project);
     const [taskPrivate, setPrivate] = useState(props.private);
     const [taskDeadline, setDeadline] = useState(props.deadline);
@@ -100,7 +102,7 @@ function Task(props) {
             <ListGroup.Item id={`task-${taskId}`} className="list-group-item d-flex w-100" action>
                 <Col sm={10}>
                     <Row>
-                        <Col sm={4}> <TaskDescription id={taskId} completed={taskCompleted} description={taskDescription} setCompleted={ event => setCompleted(event.target.checked) }/> </Col>
+                        <Col sm={4}> <TaskDescription id={taskId} completed={taskCompleted} description={taskDescription} setCompleted={ event => setCompleted(event.target.checked) } important={taskImportant}/> </Col>
                         <Col sm={1}> <TaskPrivateIcon id={taskId} private={taskPrivate}/> </Col>
                         <Col>
                             <Row>
@@ -123,7 +125,7 @@ function TaskDescription (props) {
         <Form>
             <Form.Check id={`task-${props.id}-checkbox`}>
                 <Form.Check.Input type='checkbox' defaultChecked={props.completed} value={props.completed} onChange={props.setCompleted}/>
-                <Form.Check.Label>{props.description}</Form.Check.Label>
+                <Form.Check.Label className={props.important ? 'text-danger' : ''}>{props.description}</Form.Check.Label>
             </Form.Check>
         </Form>
     );
