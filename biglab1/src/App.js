@@ -1,12 +1,14 @@
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Container, Row, Col, Dropdown, ButtonGroup, Button, ButtonToolbar } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal} from 'react-bootstrap';
 import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
 import NavBarMobile from './NavBarMobile';
-import React, { useState } from 'react';
+import DaytimeFilters from './DaytimeFilters';
 import CollapseBar from './CollapseBar';
-import TasksList from "./Task";
+import TasksList from './Task';
+import ModalTask from "./ModalTask";
 
 const fakeTasks = [
   { id: 0, description:'task1', important:'true', project:'PDS', deadline:'2021-04-29 12:00' },
@@ -23,63 +25,38 @@ const filters = [
   {label: "Private", icon: "eye-slash"},
 ];
 
-const otherFilters = ['All','Morning','Afternoon','Evening','Night'];
+const daytimeFilters = ['All','Morning','Afternoon','Evening','Night'];
 
 function App() {
   const [open, setOpen] = useState(false);
-  const [display, setDisplay] = useState("All");
   const [tasks, setTasks] = useState(fakeTasks);
+  const [filter, setFilter] = useState(filters[0].label);
+  const [showModal, setShowModal] = useState(false);
+  const handleShow = () => setShowModal(true);
 
-  const filterFunct = (display) => {
-    switch(display){
-        case("All"):
-            return;
-        case("Important"):
-            setTasks( oldTasks => oldTasks.filter( task => task.dateVariant == "danger"));
-            break;
-        case("Today's"):
-            //setTasks( oldTasks => oldTasks.filter( task => isToday(task)));
-            break; 
-        case("Next week's"):
-            //setTasks( oldTasks => oldTasks.filter( task => isNextWeek(task)));
-            break; 
-        case("Private"):
-            setTasks( oldTasks => oldTasks.filter( task => task.icon == true)); 
-            break;  
-    }
-}
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Col className="p-0 m-0">
         <Row className="d-block d-lg-none bg-primary mb-5"><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
         <Row>
-          <NavBarFilters display={display} setDisplay={setDisplay} filterFunct={filterFunct} filters={filters}/>
+          <NavBarFilters filters={filters} setFilter={setFilter}/>
           {/*<CollapseBar filters={filters}/>*/}
           <Col md={3} className="d-none d-lg-block bg-light align-items-center text-center"><NavBarProjects filters={filters}/></Col>
           <Col className="p-5 m-0 mr-md-4">
             <Row className="d-flex flex-row-reverse">
-              <ButtonToolbar className="d-none d-sm-block d-lg-block" aria-label="Toolbar with button groups">
-                <ButtonGroup className="mr-2" aria-label="First group">
-                  {otherFilters.map(tmp => <Button key={`otherfilter-${tmp}`} variant="primary">{tmp}</Button>)}
-                </ButtonGroup>
-              </ButtonToolbar>
-              <Dropdown className="d-block d-sm-none d-lg-none">
-                <Dropdown.Toggle id="dropdown-other-filters" variant="primary">Daytime filters</Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {otherFilters.map(tmp => <Dropdown.Item key={`otherfilter-${tmp}`}>{tmp}</Dropdown.Item>)}
-                </Dropdown.Menu>
-              </Dropdown>
+              <DaytimeFilters filters={daytimeFilters}/>
             </Row>
             <Row className="d-flex flex-row">
-              <h1 id='filter-title' className="mt-4">All</h1>
+              <h1 id='filter-title' className="mt-4">{filter}</h1>
             </Row>
-            <TasksList tasks={tasks} display={display}/>
+            <TasksList tasks={tasks}/>
           </Col>
         </Row>
       </Col>
-      <Button className="btn btn-lg btn-primary position-fixed rounded-circle" style={{ width: '3.5rem', height: '3.5rem', bottom: "2rem", right: "2rem" , zIndex: "2"}}>
+      <Button className="btn btn-lg btn-primary position-fixed rounded-circle" style={{ width: '3.5rem', height: '3.5rem', bottom: "2rem", right: "2rem" , zIndex: "2"}} onClick={handleShow}>
         <i className="bi bi-plus-circle-dotted text-light d-flex justify-content-center" style={{ fontSize: '2rem' }}/>
       </Button>
+      <ModalTask show={showModal} handleClose={() => setShowModal(false)}></ModalTask>
     </Container>
   );
 }
