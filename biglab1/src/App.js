@@ -13,7 +13,7 @@ import ModalTask from "./ModalTask";
 const fakeTasks = [
   { id: 0, description:'task1', important:'true', project:'PDS', deadline:'2021-04-29 12:00' },
   { id: 1, completed:'true', description:'task2', project:'Web Application 1' },
-  { id: 2, completed:'true', description:'pizza', private:'true', deadline:'04 12, 2021 8:30' },
+  { id: 2, completed:'true', description:'pizza', private:'true', deadline:'2021-12-04T8:30' },
   { id: 3, description:'lasagna', project:'Web Application 1', deadline:'1999-01-01'},
 ];
 
@@ -34,6 +34,18 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const handleShow = () => setShowModal(true);
 
+  const addTask = (task) => {
+    setTasks( oldTasks => [{id: oldTasks.length, description: task.description, important: task.important, private: task.priv, project: task.project, deadline: task.deadline}, ...oldTasks] );
+  }
+
+  const deleteTask = (id) => {
+    setTasks( oldTask => oldTask.filter(task => task.id !== id) );
+  }
+
+  const editTask = (task) => {
+    oldTasks => {oldTasks[task.id]=task;return oldTasks;}
+  }
+
   return (
     <Container fluid={true} className="pe-3 m-0">
       <Col className="p-0 m-0">
@@ -49,14 +61,14 @@ function App() {
             <Row className="d-flex flex-row">
               <h1 id='filter-title' className="mt-4">{filter}</h1>
             </Row>
-            <TasksList tasks={tasks}/>
+            <TasksList tasks={tasks} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/>
           </Col>
         </Row>
       </Col>
       <Button className="btn btn-lg btn-primary position-fixed rounded-circle" style={{ width: '3.5rem', height: '3.5rem', bottom: "2rem", right: "2rem" , zIndex: "2"}} onClick={handleShow}>
         <i className="bi bi-plus-circle-dotted text-light d-flex justify-content-center" style={{ fontSize: '2rem' }}/>
       </Button>
-      <ModalTask show={showModal} handleClose={() => setShowModal(false)}></ModalTask>
+      <ModalTask show={showModal} handleClose={() => setShowModal(false)} addTask={addTask}></ModalTask>
     </Container>
   );
 }

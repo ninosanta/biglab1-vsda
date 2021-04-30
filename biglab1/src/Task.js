@@ -17,20 +17,10 @@ import DayJS from 'react-dayjs';
 } */
 
 function TasksList (props) {
-    const [tasks, setTasks] = useState(props.tasks) ;
-
-    const deleteTask = (id) => {
-        setTasks( oldTask => oldTask.filter(task => task.id !== id) ) ;
-    }
-
-    const editTask = (id) => {
-        
-    }
-
     return (
         <ListGroup variant="flush">
             {
-                tasks.map( (task) => 
+                props.tasks.map( (task) => 
                     <Task
                         key={`task-${task.id}`}
                         id={task.id}
@@ -40,7 +30,7 @@ function TasksList (props) {
                         project={task.project}
                         private={task.private === 'true'}
                         deadline={task.deadline}
-                        deleteTask={deleteTask}
+                        deleteTask={props.deleteTask}
                     />)
             }
         </ListGroup>
