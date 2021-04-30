@@ -42,7 +42,7 @@ function App() {
   }
 
   const editTask = (task) => {
-    setTasks( oldTasks => {oldTasks[task.id]=task;return oldTasks;} );
+    oldTasks => {oldTasks[task.id]=task;return oldTasks;}
   }
 
   return (
