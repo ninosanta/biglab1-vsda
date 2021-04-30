@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ListGroup, Badge, Form, Row, Col } from "react-bootstrap";
 import DayJS from 'react-dayjs';
+import getTasks from "./Filters"
 
 /**
  function formatDeadline(date){
@@ -20,7 +21,7 @@ function TasksList (props) {
     return (
         <ListGroup variant="flush">
             {
-                props.tasks.map( (task) => 
+                getTasks(props.tasks, props.filter).map( (task) => 
                     <Task
                         key={`task-${task.id}`}
                         id={task.id}

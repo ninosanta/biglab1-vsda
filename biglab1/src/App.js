@@ -6,14 +6,13 @@ import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
 import NavBarMobile from './NavBarMobile';
 import DaytimeFilters from './DaytimeFilters';
-import CollapseBar from './CollapseBar';
 import TasksList from './Task';
 import ModalTask from "./ModalTask";
 
 const fakeTasks = [
   { id: 0, description:'task1', important:'true', project:'PDS', deadline:'2021-04-29 12:00' },
   { id: 1, completed:'true', description:'task2', project:'Web Application 1' },
-  { id: 2, completed:'true', description:'pizza', private:'true', deadline:'2021-12-04T8:30' },
+  { id: 2, completed:'true', description:'pizza', private:'true', deadline:'2021-05-04T8:30' },
   { id: 3, description:'lasagna', project:'Web Application 1', deadline:'1999-01-01'},
 ];
 
@@ -43,7 +42,7 @@ function App() {
   }
 
   const editTask = (task) => {
-    oldTasks => {oldTasks[task.id]=task;return oldTasks;}
+    setTasks( oldTasks => {oldTasks[task.id]=task;return oldTasks;} );
   }
 
   return (
@@ -61,7 +60,7 @@ function App() {
             <Row className="d-flex flex-row">
               <h1 id='filter-title' className="mt-4">{filter}</h1>
             </Row>
-            <TasksList tasks={tasks} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/>
+            <TasksList tasks={tasks} filter={filter} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/>
           </Col>
         </Row>
       </Col>
