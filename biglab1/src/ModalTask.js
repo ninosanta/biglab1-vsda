@@ -1,6 +1,6 @@
-import { Modal, Button, Form, Col, InputGroup } from 'react-bootstrap';
+import { Modal, Button, Form, Col } from 'react-bootstrap';
 import React, { useState } from 'react';
-import DayJs from 'dayjs'
+import DayJs from 'react-dayjs'
 
 function ModalTask (props) {
     const [validated, setValidated] = useState(false);
@@ -81,22 +81,22 @@ function ModalTask (props) {
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Description</Form.Label>
-                            <Form.Control id="form-description" type="text" placeholder="Description" required value={description} onChange={(e)=>{handleChange('description', e)}}/>
+                            <Form.Control id='form-description' type='text' placeholder='Description' required value={description} onChange={(e)=>{handleChange('description', e)}}/>
                             <Form.Text className='text-danger'>{messageDescription}</Form.Text>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
-                            <Form.Check id="form-important" type="switch" label="Important" defaultChecked={false} value={important} onChange={(e)=>{handleChange('important', e)}}/>
+                            <Form.Check id='form-important' type='switch' label='Important' defaultChecked={false} value={important} onChange={(e)=>{handleChange('important', e)}}/>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Check id="form-private" type="switch" label="Private" defaultChecked={false} value={priv} onChange={(e)=>{handleChange('priv', e)}}/>
+                            <Form.Check id='form-private' type='switch' label='Private' defaultChecked={false} value={priv} onChange={(e)=>{handleChange('priv', e)}}/>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group as={Col} md="6">
+                        <Form.Group as={Col} md='6'>
                             <Form.Label>Project</Form.Label>
-                            <Form.Control id="form-project" as="select" value={project} onChange={(e)=>{handleChange('project', e)}}>
+                            <Form.Control id='form-project' as='select' value={project} onChange={(e)=>{handleChange('project', e)}}>
                                 <option value='' disabled>Choose one...</option>
                                 <option>PDS</option>
                                 <option>Web Application I</option>
@@ -104,13 +104,13 @@ function ModalTask (props) {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Deadline</Form.Label>
-                            <Form.Control id="form-deadline-date" type="date" name='deadline-date' value={deadlineDate} onChange={(e)=>{handleChange('deadline-date', e)}}/>
-                            <Form.Control id="form-deadline-time" type="time" name='deadline-time' value={deadlineTime} onChange={(e)=>{handleChange('deadline-time', e)}}/>
+                            <Form.Control id='form-deadline-date' type='date' name='deadline-date' value={deadlineDate} onChange={(e)=>{handleChange('deadline-date', e)}}/>
+                            <Form.Control id='form-deadline-time' type='time' name='deadline-time' value={deadlineTime} onChange={(e)=>{handleChange('deadline-time', e)}}/>
                         </Form.Group>
                     </Form.Row>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>Close</Button>
-                        <Button type="submit">Add</Button>
+                        <Button variant='secondary' onClick={handleClose}>Close</Button>
+                        <Button type='submit'>Add</Button>
                     </Modal.Footer>
                 </Form>
             </Modal.Body>
