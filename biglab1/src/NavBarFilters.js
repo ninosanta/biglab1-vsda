@@ -12,8 +12,16 @@ function NavBarFilters(props) {
                             className='pt-3 pb-3 btn-primary text-light'
                             variant='link'
                             block
-                            onClick={() => {props.setFilter(filter.label);}}>
-                            <i className={`bi bi-${filter.icon} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
+                            onClick={() => {
+                                props.setFilter(filter.label);
+                                props.filters.forEach(f => {
+                                    document.getElementById(`filter-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
+                                    document.getElementById(`filter-mobile-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
+                                });
+                                document.getElementById(`filter-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
+                                document.getElementById(`filter-mobile-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
+                            }}>
+                            <i id={`filter-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
                         </Button>);
                     })}
 

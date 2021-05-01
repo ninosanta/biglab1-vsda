@@ -13,16 +13,22 @@ function NavBarMobile(props) {
                 <Nav className='mr-auto'>
                     {props.filters.map(filter => {
                         return (<Nav.Link
-                            key={`filter-${filter.label}`}
-                            id={`filter-${filter.label}`}
+                            key={`filter-mobile-${filter.label}`}
+                            id={`filter-mobile-${filter.label}`}
                             className='pl-3 btn-primary text-light'
                             style={{ fontSize: '1.5em' }}
                             title={filter.label}
                             onClick={() => {
                                 props.setFilter(filter.label);
+                                props.filters.forEach(f => {
+                                    document.getElementById(`filter-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
+                                    document.getElementById(`filter-mobile-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
+                                });
+                                document.getElementById(`filter-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
+                                document.getElementById(`filter-mobile-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
                             }}>
                             <Row>
-                                <Col md={1} xs={2}><i className={`bi bi-${filter.icon} d-flex justify-content-center`}  aria-label={filter.label}></i></Col>
+                                <Col md={1} xs={2}><i id={`filter-mobile-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center`}  aria-label={filter.label}></i></Col>
                                 <Col>{filter.label}</Col>
                             </Row>
                         </Nav.Link>);

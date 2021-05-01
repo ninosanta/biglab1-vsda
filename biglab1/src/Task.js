@@ -67,7 +67,7 @@ function Task(props) {
 function TaskDescription (props) {
     return (
         <Form>
-            <Form.Check id={`task-${props.id}-checkbox`}>
+            <Form.Check id={`task-${props.id}-checkbox`} custom>
                 <Form.Check.Input type='checkbox' defaultChecked={props.completed} value={props.completed} onChange={props.setCompleted}/>
                 <Form.Check.Label className={props.important ? 'text-danger' : ''}>{props.description}</Form.Check.Label>
             </Form.Check>
@@ -76,7 +76,7 @@ function TaskDescription (props) {
 }
 
 function TaskPrivateIcon (props) {
-    if(props.private) return (<i id={`task-${props.id}-private`} className='bi bi-eye-slash ml-3' aria-label='Private' variant='secondary' style={{ fontSize: '1em' }}></i>);
+    if(props.private) return (<i id={`task-${props.id}-private`} className='bi bi-eye-slash-fill ml-3' aria-label='Private' variant='secondary' style={{ fontSize: '1em' }}></i>);
     return (<></>);
 }
 

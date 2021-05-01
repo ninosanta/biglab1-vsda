@@ -78,7 +78,7 @@ function ModalTask (props) {
     return (
         <Modal show={props.show} onHide={handleClose} centered>
             <Modal.Header closeButton><Modal.Title>{props.task?.id? 'Edit Task' : 'Add new task'}</Modal.Title></Modal.Header>
-            <Modal.Body>
+            <Modal.Body className='bg-light'>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <Form.Row>
                         <Form.Group as={Col}>
