@@ -60,6 +60,8 @@ function App() {
       document.getElementById(`filter-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
       document.getElementById(`filter-mobile-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
     });
+    console.log('filter '+filter.label);
+    if(!filters.map(filter => filter.label).includes(filter.label)) return;
     document.getElementById(`filter-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
     document.getElementById(`filter-mobile-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
   }

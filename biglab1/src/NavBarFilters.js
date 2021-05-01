@@ -26,8 +26,8 @@ function NavBarFilters(props) {
                                     className='mx-2 w-auto'
                                     placeholder='Type to filter...'
                                     onChange={(e) => {
-                                        if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
-                                        else if(e.target.value.length <= 15) props.setFilter(e.target.value);
+                                        if(e.target.value.length < 1) props.setFilter(props.filters[0]);
+                                        else if(e.target.value.length <= 15) props.setFilter({label: e.target.value});
                                     }}/>
                             </Popover.Content>
                         </Popover>
