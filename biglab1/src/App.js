@@ -54,12 +54,22 @@ function App() {
     }
   }
 
+  function selectFilter (filter) {
+    setFilter(filter.label);
+    filters.forEach(f => {
+      document.getElementById(`filter-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
+      document.getElementById(`filter-mobile-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
+    });
+    document.getElementById(`filter-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
+    document.getElementById(`filter-mobile-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
+  }
+
   return (
     <Container fluid={true} className='pe-3 m-0'>
       <Col className='p-0 m-0'>
-        <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters} setFilter={setFilter}/></Row>
+        <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters} setFilter={selectFilter}/></Row>
         <Row>
-          <NavBarFilters filters={filters} setFilter={setFilter}/>
+          <NavBarFilters filters={filters} setFilter={selectFilter}/>
           {/*<CollapseBar filters={filters}/>*/}
           <Col md={3} className='d-none d-lg-block bg-light align-items-center text-center'><NavBarProjects filters={filters}/></Col>
           <Col className='p-5 m-0 mr-md-4'>

@@ -18,15 +18,7 @@ function NavBarMobile(props) {
                             className='pl-3 btn-primary text-light'
                             style={{ fontSize: '1.5em' }}
                             title={filter.label}
-                            onClick={() => {
-                                props.setFilter(filter.label);
-                                props.filters.forEach(f => {
-                                    document.getElementById(`filter-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
-                                    document.getElementById(`filter-mobile-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
-                                });
-                                document.getElementById(`filter-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
-                                document.getElementById(`filter-mobile-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
-                            }}>
+                            onClick={ () => props.setFilter(filter) }>
                             <Row>
                                 <Col md={1} xs={2}><i id={`filter-mobile-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center`}  aria-label={filter.label}></i></Col>
                                 <Col>{filter.label}</Col>
@@ -43,8 +35,9 @@ function NavBarMobile(props) {
                                         placeholder='Type to filter...' 
                                         className='mr-sm-2 w-sm-75' 
                                         onChange={(e) => {
-                                            if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
-                                            else if(e.target.value.length <= 15) props.setFilter(e.target.value);
+                                            if(e.target.value.length < 1) {
+                                                props.setFilter(props.filters[0].label);
+                                            } else if(e.target.value.length <= 15) props.setFilter(e.target.value);
                                         }}/>
                                 </Form>
                             </Col>
