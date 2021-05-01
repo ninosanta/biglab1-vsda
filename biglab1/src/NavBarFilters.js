@@ -1,25 +1,20 @@
 import {Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button, Col } from 'react-bootstrap';
 
 function NavBarFilters(props) {
-    let active = false;
-
     return (
         <Col md={1} className='d-none d-lg-block bg-light align-items-center text-center p-0'>
             <Nav id='filter-navbar' className='d-flex flex-column bg-primary position-fixed text-center' style={{ minHeight: '100%', width: '5rem' }}>
                 <ButtonGroup vertical className='w-100 pt-5 align-items-center'>
                     {props.filters.map(filter => {
-                        return <Button
-                            id={`filter-${filter.label}`}
+                        return (<Button
                             key={`filter-${filter.label}`}
+                            id={`filter-${filter.label}`}
                             className='pt-3 pb-3 btn-primary text-light'
                             variant='link'
                             block
-                            onClick={() => {
-                                props.setFilter(filter.label);
-                            }}
-                            >
+                            onClick={() => {props.setFilter(filter.label);}}>
                             <i className={`bi bi-${filter.icon} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
-                        </Button>;
+                        </Button>);
                     })}
 
                     <OverlayTrigger placement='right' overlay={
@@ -33,8 +28,7 @@ function NavBarFilters(props) {
                                     onChange={(e) => {
                                         if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
                                         else if(e.target.value.length <= 15) props.setFilter(e.target.value);
-                                        }}
-                                />
+                                    }}/>
                             </Popover.Content>
                         </Popover>
                     }>

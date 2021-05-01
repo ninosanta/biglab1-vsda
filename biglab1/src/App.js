@@ -30,9 +30,9 @@ function App() {
   const [open, setOpen] = useState(false);
   const [tasks, setTasks] = useState(fakeTasks);
   const [filter, setFilter] = useState(filters[0].label);
-  const [showModal, setShowModal] = useState(false);
+  const [showModalTask, setShowModalTask] = useState(false);
 
-  const handleShow = () => setShowModal(true);
+  const handleShow = () => setShowModalTask(true);
 
   const addTask = (task) => {
     setTasks( oldTasks => [{id: oldTasks.length, description: task.description, important: task.important, private: task.priv, project: task.project, deadline: task.deadline}, ...oldTasks] );
@@ -49,9 +49,9 @@ function App() {
   return (
     <Container fluid={true} className='pe-3 m-0'>
       <Col className='p-0 m-0'>
-        <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
+        <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters} setFilter={setFilter}/></Row>
         <Row>
-          <NavBarFilters filters={filters}setFilter={setFilter}/>
+          <NavBarFilters filters={filters} setFilter={setFilter}/>
           {/*<CollapseBar filters={filters}/>*/}
           <Col md={3} className='d-none d-lg-block bg-light align-items-center text-center'><NavBarProjects filters={filters}/></Col>
           <Col className='p-5 m-0 mr-md-4'>
@@ -68,7 +68,7 @@ function App() {
       <Button className='btn btn-lg btn-primary position-fixed rounded-circle' style={{ width: '3.5rem', height: '3.5rem', bottom: '2rem', right: '2rem' , zIndex: '2'}} onClick={handleShow}>
         <i className='bi bi-plus-circle-dotted text-light d-flex justify-content-center' style={{ fontSize: '2rem' }}/>
       </Button>
-      <ModalTask show={showModal} handleClose={() => setShowModal(false)} addTask={addTask}></ModalTask>
+      <ModalTask show={showModalTask} handleClose={() => setShowModalTask(false)} addTask={addTask}></ModalTask>
     </Container>
   );
 }

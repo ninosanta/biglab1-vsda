@@ -1,6 +1,6 @@
-import { Modal, Button, Form, Col, InputGroup } from 'react-bootstrap';
+import { Modal, Button, Form, Col } from 'react-bootstrap';
 import React, { useState } from 'react';
-import DayJs from 'dayjs'
+import DayJs from 'react-dayjs';
 
 function ModalTask (props) {
     const [validated, setValidated] = useState(false);
