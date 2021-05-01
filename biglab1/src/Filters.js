@@ -10,10 +10,10 @@ function getTasks (tasks, filter) {
         case('Private'):
             return tasks.filter(task => task.private === 'true' || task.private === true);
         case("Today's"):
-            return tasks.filter(task => isToday(task));
+            return tasks.filter(task => task.deadline && isToday(task.deadline));
         case("Next week's"):
-            return tasks.filter(task => isNextWeek(task));
-        default:
+            return tasks.filter(task => task.deadline && isNextWeek(task.deadline));
+        default: // search filter
             return tasks.filter(task => task.description.includes(filter));
     }
 }
@@ -25,7 +25,7 @@ function getTasks (tasks, filter) {
  function isToday(date){
     const comparisonTemplate = 'YYYY-MM-DD';
     const now = dayjs();
-    return dayjs(date.deadline) && (dayjs(date.deadline).format(comparisonTemplate) === now.format(comparisonTemplate)) 
+    return dayjs(date) && (dayjs(date).format(comparisonTemplate) === now.format(comparisonTemplate)) 
 }
 
 /*
@@ -35,8 +35,8 @@ function getTasks (tasks, filter) {
 function isNextWeek(date){
     const tomorrow = dayjs().add(1, 'day');
     const nextWeek = dayjs().add(7, 'day');
-    const ret = dayjs(date.deadline) && ( !dayjs(date.deadline).isBefore(tomorrow,'day') && !dayjs(date.deadline).isAfter(nextWeek,'day') );
-    //console.dir(dayjs(date.deadline));
+    const ret = dayjs(date) && ( !dayjs(date).isBefore(tomorrow,'day') && !dayjs(date).isAfter(nextWeek,'day') );
+    //console.dir(dayjs(date));
     return ret;
 }
 
@@ -47,7 +47,7 @@ function isNextWeek(date){
 function isYesterday(date){
     const comparisonTemplate = 'YYYY-MM-DD';
     const yesterday = DayJS().subtract(1, 'day');
-    return date.deadline && (date.deadline.format(comparisonTemplate) === yesterday.format(comparisonTemplate));
+    return date && (date.format(comparisonTemplate) === yesterday.format(comparisonTemplate));
 }*/
 
 /*
@@ -57,7 +57,7 @@ function isYesterday(date){
  function isTomorrow(date){
     const comparisonTemplate = 'YYYY-MM-DD';
     const tomorrow = DayJS().add(1, 'day');
-    return date.deadline && (date.deadline.format(comparisonTemplate) === tomorrow.format(comparisonTemplate));
+    return date && (date.format(comparisonTemplate) === tomorrow.format(comparisonTemplate));
 }*/
 
  export default getTasks;
