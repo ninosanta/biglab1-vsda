@@ -38,7 +38,7 @@ function App() {
 
   const handleTaskList = {
     addTask: (task) => {
-      setTasks( oldTasks => [{id: oldTasks.length, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
+      setTasks( oldTasks => [{id: oldTasks.length+1, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
     },
 
     setEditTask: (task) => {

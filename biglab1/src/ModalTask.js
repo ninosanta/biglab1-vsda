@@ -66,6 +66,7 @@ function ModalTask (props) {
 
     const handleClose = () => {
         setValidated(false);
+        //handleChange(); // no need to reset fields
         props.handleModalTask(false, undefined);
     }
 
