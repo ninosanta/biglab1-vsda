@@ -24,14 +24,9 @@ function TasksList (props) {
                 getTasks(props.tasks, props.filter).map( (task) => 
                     <Task
                         key={`task-${task.id}`}
-                        id={task.id}
-                        completed={task.completed === 'true'}
-                        description={task.description || 'New Task'}
-                        important={task.important === 'true' || task.important === true}
-                        private={task.private === 'true' || task.private === true}
-                        project={task.project}
-                        deadline={task.deadline}
+                        task={task}
                         deleteTask={props.deleteTask}
+                        editTask={props.editTask}
                     />)
             }
         </ListGroup>
@@ -39,13 +34,13 @@ function TasksList (props) {
 }
 
 function Task(props) {
-    const [taskId, setId] = useState(props.id);
-    const [taskCompleted, setCompleted] = useState(props.completed);
-    const [taskDescription, setDescription] = useState(props.description);
-    const [taskImportant, setImportant] = useState(props.important);
-    const [taskPrivate, setPrivate] = useState(props.private);
-    const [taskProject, setProject] = useState(props.project);
-    const [taskDeadline, setDeadline] = useState(props.deadline);
+    const [taskId, setId] = useState(props.task.id);
+    const [taskCompleted, setCompleted] = useState(props.task.completed === 'true' || props.task.completed === true);
+    const [taskDescription, setDescription] = useState(props.task.description);
+    const [taskImportant, setImportant] = useState(props.task.important === 'true' || props.task.important === true);
+    const [taskPrivate, setPrivate] = useState(props.task.private === 'true' || props.task.private === true);
+    const [taskProject, setProject] = useState(props.task.project);
+    const [taskDeadline, setDeadline] = useState(props.task.deadline);
 
     return (
         <Row >
@@ -63,7 +58,7 @@ function Task(props) {
                     </Row>
                 </Col>
                 <Col className='d-flex d-inline-flex flex-row-reverse'>
-                    <TaskControls id={taskId} deleteTask={props.deleteTask}/>
+                    <TaskControls task={props.task} deleteTask={props.deleteTask} editTask={props.editTask}/>
                 </Col>
             </ListGroup.Item>
         </Row>
@@ -105,10 +100,10 @@ function TaskDeadline (props) {
 function TaskControls(props) {
     return (
         <Row>
-            <div className='pr-2' onClick={() => props.editTask(props.id)}>
+            <div className='pr-2' onClick={() => props.editTask(props.task)}>
                 <i id={`task-${props.id}-edit`} className='bi bi-pencil-square text-primary' aria-label='Edit'></i>
             </div>
-            <div className='pr-2' onClick={() => props.deleteTask(props.id)}>
+            <div className='pr-2' onClick={() => props.deleteTask(props.task.id)}>
                 <i id={`task-${props.id}-delete`} className='bi bi-trash text-danger' aria-label='Delete'></i>
             </div>
         </Row>

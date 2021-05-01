@@ -12,7 +12,7 @@ import ModalTask from './ModalTask';
 const fakeTasks = [
   { id: 0, description:'task1', important:'true', project:'PDS', deadline:'2021-04-29 12:00' },
   { id: 1, completed:'true', description:'task2', project:'Web Application 1' },
-  { id: 2, completed:'true', description:'pizza', private:'true', deadline:'2021-05-04T8:30' },
+  { id: 2, completed:'true', description:'pizza', private: true, deadline:'2021-05-04T8:30' },
   { id: 3, description:'lasagna', project:'Web Application 1', deadline:'1999-01-01'},
 ];
 
@@ -31,19 +31,25 @@ function App() {
   const [tasks, setTasks] = useState(fakeTasks);
   const [filter, setFilter] = useState(filters[0].label);
   const [showModalTask, setShowModalTask] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState('');
 
   const handleShow = () => setShowModalTask(true);
+
+  const handleEdit = (task) => {
+    setTaskToEdit(task);
+    handleShow();
+  }
 
   const addTask = (task) => {
     setTasks( oldTasks => [{id: oldTasks.length, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
   }
 
-  const deleteTask = (id) => {
-    setTasks( oldTask => oldTask.filter(task => task.id !== id) );
-  }
-
   const editTask = (task) => {
     oldTasks => {oldTasks.map(t => {if(t.id === task.id)return task;else return t;})}
+  }
+
+  const deleteTask = (id) => {
+    setTasks( oldTask => oldTask.filter(task => task.id !== id) );
   }
 
   return (
@@ -61,14 +67,14 @@ function App() {
             <Row className='d-flex flex-row'>
               <h1 id='filter-title' className='mt-4'>{filter}</h1>
             </Row>
-            <TasksList tasks={tasks} filter={filter} addTask={addTask} deleteTask={deleteTask} editTask={editTask}/>
+            <TasksList tasks={tasks} filter={filter} addTask={addTask} editTask={handleEdit} deleteTask={deleteTask}/>
           </Col>
         </Row>
       </Col>
       <Button className='btn btn-lg btn-primary position-fixed rounded-circle' style={{ width: '3.5rem', height: '3.5rem', bottom: '2rem', right: '2rem' , zIndex: '2'}} onClick={handleShow}>
         <i className='bi bi-plus-circle-dotted text-light d-flex justify-content-center' style={{ fontSize: '2rem' }}/>
       </Button>
-      <ModalTask show={showModalTask} handleClose={() => setShowModalTask(false)} addTask={addTask}></ModalTask>
+      <ModalTask show={showModalTask} handleClose={() => setShowModalTask(false)} addTask={addTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} editTask={editTask} deleteTask={deleteTask}></ModalTask>
     </Container>
   );
 }

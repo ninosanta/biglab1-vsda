@@ -1,22 +1,26 @@
 import { Modal, Button, Form, Col } from 'react-bootstrap';
 import React, { useState } from 'react';
-import DayJs from 'dayjs';
+import dayjs from 'dayjs';
 
 function ModalTask (props) {
     const [validated, setValidated] = useState(false);
-    const [description, setDescription] = useState('');
+    const [description, setDescription] = useState(props.taskToEdit? props.taskToEdit.description : '');
     const [messageDescription, setMessageDescription] = useState('');
-    const [important, setImportant] = useState(false);
-    const [priv, setPriv] = useState(false);
-    const [project, setProject] = useState('');
-    const [deadlineDate, setDeadlineDate] = useState('');
-    const [deadlineTime, setDeadlineTime] = useState('');
-    
+    const [important, setImportant] = useState(props.taskToEdit? props.taskToEdit.important : false);
+    const [priv, setPriv] = useState(props.taskToEdit? props.taskToEdit.private : false);
+    const [project, setProject] = useState(props.taskToEdit? props.taskToEdit.project : '');
+    const [deadlineDate, setDeadlineDate] = useState((props.taskToEdit && props.taskToEdit.deadline)? props.taskToEdit.deadline.split('T')[0] : '');
+    const [deadlineTime, setDeadlineTime] = useState((props.taskToEdit && props.taskToEdit.deadline)? props.taskToEdit.deadline.split('T')[1] : '');
+    console.log(props.taskToEdit?.id);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         event.stopPropagation();
         if(event.currentTarget.checkValidity()) {
-            props.addTask({description: description, important: important, private: priv, project: (project==='')? undefined : project, deadline: (deadlineDate==='')? undefined : deadlineDate+'T'+deadlineTime});
+            if(props.taskToEdit.id)
+                props.editTask({id: props.taskToEdit.id, description: description, important: important, private: priv, project: (project==='')? undefined : project, deadline: (deadlineDate==='')? undefined : deadlineDate+'T'+deadlineTime});
+            else
+                props.addTask({description: description, important: important, private: priv, project: (project==='')? undefined : project, deadline: (deadlineDate==='')? undefined : deadlineDate+'T'+deadlineTime});
             handleClose();
         } else {
             setValidated(true);
@@ -49,7 +53,7 @@ function ModalTask (props) {
             case 'deadline-time':
                 setDeadlineTime(event.target.value);
                 if(deadlineDate === '') {
-                    setDeadlineDate(DayJs().format('YYYY-MM-DD'));
+                    setDeadlineDate(dayjs().format('YYYY-MM-DD'));
                 }
                 break;
             default:
@@ -58,6 +62,8 @@ function ModalTask (props) {
     }
 
     const handleClose = () => {
+        props.setTaskToEdit(undefined);
+        setValidated(false);
         setDescription('');
         setMessageDescription('');
         setImportant(false);
@@ -65,7 +71,6 @@ function ModalTask (props) {
         setProject('');
         setDeadlineDate('');
         setDeadlineTime('');
-        setValidated(false);
         props.handleClose();
     }
 
