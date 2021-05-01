@@ -27,9 +27,9 @@ function TasksList (props) {
                         id={task.id}
                         completed={task.completed === 'true'}
                         description={task.description || 'New Task'}
-                        important={task.important === 'true'}
+                        important={task.important === 'true' || task.important === true}
+                        private={task.private === 'true' || task.private === true}
                         project={task.project}
-                        private={task.private === 'true'}
                         deadline={task.deadline}
                         deleteTask={props.deleteTask}
                     />)
@@ -39,12 +39,12 @@ function TasksList (props) {
 }
 
 function Task(props) {
-    const taskId = props.id;
+    const [taskId, setId] = useState(props.id);
     const [taskCompleted, setCompleted] = useState(props.completed);
     const [taskDescription, setDescription] = useState(props.description);
     const [taskImportant, setImportant] = useState(props.important);
-    const [taskProject, setProject] = useState(props.project);
     const [taskPrivate, setPrivate] = useState(props.private);
+    const [taskProject, setProject] = useState(props.project);
     const [taskDeadline, setDeadline] = useState(props.deadline);
 
     return (

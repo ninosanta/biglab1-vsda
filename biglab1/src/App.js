@@ -35,7 +35,7 @@ function App() {
   const handleShow = () => setShowModalTask(true);
 
   const addTask = (task) => {
-    setTasks( oldTasks => [{id: oldTasks.length, description: task.description, important: task.important, private: task.priv, project: task.project, deadline: task.deadline}, ...oldTasks] );
+    setTasks( oldTasks => [{id: oldTasks.length, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
   }
 
   const deleteTask = (id) => {
