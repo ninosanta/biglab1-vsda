@@ -13,7 +13,7 @@ const fakeTasks = [ // id: 0 is "false" so we should start from 1
   {id: 1, completed: 'false', description: 'task1', important: 'true', private: 'false', project: 'PDS', deadline: '2021-04-29T12:00'},
   {id: 2, completed: 'true', description: 'task2', important: 'false', private: 'false', project: 'Web Application 1', deadline: ''},
   {id: 3, completed: 'true', description: 'pizza', important: 'false', private: 'true', project: '', deadline: '2021-05-04T08:30'},
-  {id: 4, completed: 'false', description: 'lasagna', important: 'false', private: 'false', project: 'Web Application 1', deadline: '1999-01-01T24:00'}
+  {id: 4, completed: 'false', description: 'lasagna', important: 'false', private: 'false', project: 'Web Application 1', deadline: '1999-01-01T00:00'}
 ];
 
 const filters = [

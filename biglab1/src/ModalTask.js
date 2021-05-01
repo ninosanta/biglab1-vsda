@@ -48,7 +48,7 @@ function ModalTask (props) {
                 setProject(event.target.value);
                 break;
             case 'deadline-date':
-                setDeadline(`${event.target.value}T${(deadline.split('T')[1] === '')? '24:00' : deadline.split('T')[1]}`);
+                setDeadline(`${event.target.value}T${(deadline.split('T')[1] === '')? '00:00' : deadline.split('T')[1]}`);
                 break;
             case 'deadline-time':
                 setDeadline(`${(deadline.split('T')[0] === '')? dayjs().format('YYYY-MM-DD') : deadline.split('T')[0]}T${event.target.value}`);
@@ -66,7 +66,6 @@ function ModalTask (props) {
 
     const handleClose = () => {
         setValidated(false);
-        handleChange();
         props.handleModalTask(false, undefined);
     }
 
@@ -113,7 +112,7 @@ function ModalTask (props) {
                     <Modal.Footer>
                         {props.task?.id? <Button variant='danger' onClick={handleDelete}>Delete</Button> : <></>}
                         <Button variant='secondary' onClick={handleClose}>Close</Button>
-                        <Button type='submit'>Add</Button>
+                        <Button type='submit'>{props.task?.id? 'Save' : 'Add'}</Button>
                     </Modal.Footer>
                 </Form>
             </Modal.Body>
