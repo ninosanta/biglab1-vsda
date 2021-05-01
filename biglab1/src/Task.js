@@ -44,20 +44,22 @@ function Task(props) {
     return (
         <Row >
             <ListGroup.Item id={`task-${taskId}`} className='list-group-item d-flex w-100' action>
-                <Col sm={10}>
+                <Col onClick={() => props.handleTaskList.setEditTask(props.task)}>
                     <Row>
-                        <Col sm={4}> <TaskDescription id={taskId} completed={taskCompleted} description={taskDescription} setCompleted={ event => setCompleted(event.target.checked) } important={taskImportant}/> </Col>
-                        <Col sm={1}> <TaskPrivateIcon id={taskId} private={taskPrivate}/> </Col>
+                        <Col xs={4}> <TaskDescription id={taskId} completed={taskCompleted} description={taskDescription} setCompleted={ event => setCompleted(event.target.checked) } important={taskImportant}/> </Col>
+                        <Col xs={1}> <TaskPrivateIcon id={taskId} private={taskPrivate}/> </Col>
                         <Col>
                             <Row>
-                                <Col className='d-flex d-inline-flex'> <TaskProject id={taskId} project={taskProject}/> </Col>
-                                <Col className='d-flex d-inline-flex'> <TaskDeadline id={taskId} deadline={taskDeadline}/> </Col>
+                                <Col className='d-inline-flex'> <TaskProject id={taskId} project={taskProject}/> </Col>
+                                <Col className='d-inline-flex'> <TaskDeadline id={taskId} deadline={taskDeadline}/> </Col>
                             </Row>
                         </Col>
                     </Row>
                 </Col>
-                <Col className='d-flex d-inline-flex flex-row-reverse'>
-                    <TaskControls task={props.task} handleTaskList={props.handleTaskList}/>
+                <Col xs={1} className='d-inline-flex flex-row-reverse'>
+                    <Row>
+                        <TaskControls task={props.task} handleTaskList={props.handleTaskList}/>
+                    </Row>
                 </Col>
             </ListGroup.Item>
         </Row>
