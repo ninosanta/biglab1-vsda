@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Container, Row, Col, Button, Modal} from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import NavBarFilters from './NavBarFilters';
 import NavBarProjects from './NavBarProjects';
 import NavBarMobile from './NavBarMobile';
@@ -9,11 +9,11 @@ import DaytimeFilters from './DaytimeFilters';
 import TasksList from './Task';
 import ModalTask from './ModalTask';
 
-const fakeTasks = [
-  {id: 0, completed: 'false', description: 'task1', important: 'true', private: 'false', project: 'PDS', deadline: '2021-04-29T12:00'},
-  {id: 1, completed: 'true', description: 'task2', important: 'false', private: 'false', project: 'Web Application 1', deadline: ''},
-  {id: 2, completed: 'true', description: 'pizza', important: 'false', private: 'true', project: '', deadline: '2021-05-04T08:30'},
-  {id: 3, completed: 'false', description: 'lasagna', important: 'false', private: 'false', project: 'Web Application 1', deadline: '1999-01-01T24:00'}
+const fakeTasks = [ // id: 0 is "false" so we should start from 1
+  {id: 1, completed: 'false', description: 'task1', important: 'true', private: 'false', project: 'PDS', deadline: '2021-04-29T12:00'},
+  {id: 2, completed: 'true', description: 'task2', important: 'false', private: 'false', project: 'Web Application 1', deadline: ''},
+  {id: 3, completed: 'true', description: 'pizza', important: 'false', private: 'true', project: '', deadline: '2021-05-04T08:30'},
+  {id: 4, completed: 'false', description: 'lasagna', important: 'false', private: 'false', project: 'Web Application 1', deadline: '1999-01-01T24:00'}
 ];
 
 const filters = [
@@ -30,26 +30,28 @@ function App() {
   const [open, setOpen] = useState(false);
   const [tasks, setTasks] = useState(fakeTasks);
   const [filter, setFilter] = useState(filters[0].label);
-  const [showModalTask, setShowModalTask] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState({});
+  const [modalTask, setModalTask] = useState({show: false, task: undefined});
 
-  const handleShow = () => setShowModalTask(true);
-
-  const handleEdit = (task) => {
-    setTaskToEdit(task);
-    handleShow();
+  const handleModalTask = (show, task) => {
+    setModalTask({show: show, task: task});
   }
 
-  const addTask = (task) => {
-    setTasks( oldTasks => [{id: oldTasks.length, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
-  }
+  const handleTaskList = {
+    addTask: (task) => {
+      setTasks( oldTasks => [{id: oldTasks.length, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
+    },
 
-  const editTask = (task) => {
-    oldTasks => {oldTasks.map(t => {if(t.id === task.id)return task;else return t;})}
-  }
-
-  const deleteTask = (id) => {
-    setTasks( oldTask => oldTask.filter(task => task.id !== id) );
+    setEditTask: (task) => {
+      handleModalTask(true, task);
+    },
+    
+    editTask: (task) => {
+      setTasks( oldTasks => {oldTasks.map(t => {if(t.id === task.id)return task;else return t;})} );
+    },
+    
+    deleteTask: (id) => {
+      setTasks( oldTask => oldTask.filter(t => t.id !== id) );
+    }
   }
 
   return (
@@ -67,16 +69,22 @@ function App() {
             <Row className='d-flex flex-row'>
               <h1 id='filter-title' className='mt-4'>{filter}</h1>
             </Row>
-            <TasksList tasks={tasks} filter={filter} addTask={addTask} editTask={handleEdit} deleteTask={deleteTask}/>
+            <TasksList tasks={tasks} filter={filter} handleTaskList={handleTaskList}/>
           </Col>
         </Row>
       </Col>
-      <Button className='btn btn-lg btn-primary position-fixed rounded-circle' style={{ width: '3.5rem', height: '3.5rem', bottom: '2rem', right: '2rem' , zIndex: '2'}} onClick={handleShow}>
+      <Button className='btn btn-lg btn-primary position-fixed rounded-circle' style={{ width: '3.5rem', height: '3.5rem', bottom: '2rem', right: '2rem' , zIndex: '2'}} onClick={ () => handleModalTask(true, undefined) }>
         <i className='bi bi-plus-circle-dotted text-light d-flex justify-content-center' style={{ fontSize: '2rem' }}/>
       </Button>
-      <ModalTask show={showModalTask} handleClose={() => setShowModalTask(false)} addTask={addTask} taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} editTask={editTask} deleteTask={deleteTask}></ModalTask>
+      <Modal show={modalTask.show} task={modalTask.task} handleModalTask={handleModalTask} handleTaskList={handleTaskList}/>
     </Container>
   );
+}
+
+function Modal (props) {
+  if(props.show)
+    return (<ModalTask show={props.show} task={props.task} handleModalTask={props.handleModalTask} handleTaskList={props.handleTaskList}></ModalTask>);
+  return (<></>);
 }
 
 export default App;

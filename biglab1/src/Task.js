@@ -25,8 +25,7 @@ function TasksList (props) {
                     <Task
                         key={`task-${task.id}`}
                         task={task}
-                        deleteTask={props.deleteTask}
-                        editTask={props.editTask}
+                        handleTaskList={props.handleTaskList}
                     />)
             }
         </ListGroup>
@@ -58,7 +57,7 @@ function Task(props) {
                     </Row>
                 </Col>
                 <Col className='d-flex d-inline-flex flex-row-reverse'>
-                    <TaskControls task={props.task} deleteTask={props.deleteTask} editTask={props.editTask}/>
+                    <TaskControls task={props.task} handleTaskList={props.handleTaskList}/>
                 </Col>
             </ListGroup.Item>
         </Row>
@@ -100,10 +99,10 @@ function TaskDeadline (props) {
 function TaskControls(props) {
     return (
         <Row>
-            <div className='pr-2' onClick={() => props.editTask(props.task)}>
+            <div className='pr-2' onClick={() => props.handleTaskList.setEditTask(props.task)}>
                 <i id={`task-${props.id}-edit`} className='bi bi-pencil-square text-primary' aria-label='Edit'></i>
             </div>
-            <div className='pr-2' onClick={() => props.deleteTask(props.task.id)}>
+            <div className='pr-2' onClick={() => props.handleTaskList.deleteTask(props.task.id)}>
                 <i id={`task-${props.id}-delete`} className='bi bi-trash text-danger' aria-label='Delete'></i>
             </div>
         </Row>
