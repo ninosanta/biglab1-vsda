@@ -46,7 +46,7 @@ function App() {
     },
     
     editTask: (task) => {
-      setTasks( oldTasks => {oldTasks.map(t => {if(t.id === task.id)return task;else return t;})} );
+      setTasks( oldTasks => oldTasks.map(t => {if(t.id === task.id)return task;else return t;}) );
     },
     
     deleteTask: (id) => {
