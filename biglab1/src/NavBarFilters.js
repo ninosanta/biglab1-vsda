@@ -3,7 +3,6 @@ import {Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button, C
 function NavBarFilters(props) {
     let active = false;
 
-
     return (
         <Col md={1} className='d-none d-lg-block bg-light align-items-center text-center p-0'>
             <Nav id='filter-navbar' className='d-flex flex-column bg-primary position-fixed text-center' style={{ minHeight: '100%', width: '5rem' }}>
@@ -31,7 +30,10 @@ function NavBarFilters(props) {
                                     autoFocus
                                     className='mx-2 w-auto'
                                     placeholder='Type to filter...'
-                                    onChange={(e) => { if (e.target.value.length >= 1 && e.target.value.length <= 15) document.getElementById('filter-title').innerText = e.target.value; }}
+                                    onChange={(e) => {
+                                        if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
+                                        else if(e.target.value.length <= 15) props.setFilter(e.target.value);
+                                        }}
                                 />
                             </Popover.Content>
                         </Popover>

@@ -31,6 +31,7 @@ function App() {
   const [tasks, setTasks] = useState(fakeTasks);
   const [filter, setFilter] = useState(filters[0].label);
   const [showModal, setShowModal] = useState(false);
+
   const handleShow = () => setShowModal(true);
 
   const addTask = (task) => {
@@ -42,7 +43,7 @@ function App() {
   }
 
   const editTask = (task) => {
-    oldTasks => {oldTasks[task.id]=task;return oldTasks;}
+    oldTasks => {oldTasks.map(t => {if(t.id === task.id)return task;else return t;})}
   }
 
   return (
@@ -50,7 +51,7 @@ function App() {
       <Col className='p-0 m-0'>
         <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters}/></Row>
         <Row>
-          <NavBarFilters filters={filters} setFilter={setFilter}/>
+          <NavBarFilters filters={filters}setFilter={setFilter}/>
           {/*<CollapseBar filters={filters}/>*/}
           <Col md={3} className='d-none d-lg-block bg-light align-items-center text-center'><NavBarProjects filters={filters}/></Col>
           <Col className='p-5 m-0 mr-md-4'>

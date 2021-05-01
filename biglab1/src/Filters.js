@@ -6,13 +6,15 @@ function getTasks (tasks, filter) {
         case('All'):
             return tasks;
         case('Important'):
-            return tasks.filter(task => task.important == 'true');
+            return tasks.filter(task => task.important === 'true');
         case("Today's"):
             return tasks.filter(task => isToday(task));
         case("Next week's"):
             return tasks.filter(task => isNextWeek(task));
         case('Private'):
-            return tasks.filter(task => task.private == 'true'); 
+            return tasks.filter(task => task.private === 'true');
+        default:
+            return tasks.filter(task => task.description.includes(filter));
     }
 }
 
