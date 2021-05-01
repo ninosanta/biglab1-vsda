@@ -3,16 +3,16 @@ import DayJS from 'react-dayjs';
 
 function getTasks (tasks, filter) {
     switch(filter){
-        case("All"):
+        case('All'):
             return tasks;
-        case("Important"):
+        case('Important'):
             return tasks.filter(task => task.important == 'true');
         case("Today's"):
             return tasks.filter(task => isToday(task));
         case("Next week's"):
             return tasks.filter(task => isNextWeek(task));
-        case("Private"):
-            return tasks.filter(task => task.private == "true"); 
+        case('Private'):
+            return tasks.filter(task => task.private == 'true'); 
     }
 }
 
