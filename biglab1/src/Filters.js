@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import DayJS from 'react-dayjs';
 
 function getTasks (tasks, filter) {
-    console.log(tasks);
     switch(filter){
         case('All'):
             return tasks;
