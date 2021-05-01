@@ -111,7 +111,7 @@ function ModalTask (props) {
                         </Form.Group>
                     </Form.Row>
                     <Modal.Footer>
-                        {props.task?.id? <Button variant='danger' onClick={handleDelete}>Delete</Button> : <></>}
+                        {props.task?.id? <Button variant='danger' onClick={() => handleDelete(props.task.id)}>Delete</Button> : <></>}
                         <Button variant='secondary' onClick={handleClose}>Close</Button>
                         <Button type='submit'>{props.task?.id? 'Save' : 'Add'}</Button>
                     </Modal.Footer>
