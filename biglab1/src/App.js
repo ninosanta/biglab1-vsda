@@ -10,10 +10,10 @@ import TasksList from './Task';
 import ModalTask from './ModalTask';
 
 const fakeTasks = [
-  { id: 0, description:'task1', important:'true', project:'PDS', deadline:'2021-04-29 12:00' },
+  { id: 0, completed:'false', description:'task1', important:'true', project:'PDS', deadline:'2021-04-29 12:00' },
   { id: 1, completed:'true', description:'task2', project:'Web Application 1' },
   { id: 2, completed:'true', description:'pizza', private: true, deadline:'2021-05-04T8:30' },
-  { id: 3, description:'lasagna', project:'Web Application 1', deadline:'1999-01-01'},
+  { id: 3, completed:'false',description:'lasagna', project:'Web Application 1', deadline:'1999-01-01'},
 ];
 
 const filters = [
@@ -31,7 +31,7 @@ function App() {
   const [tasks, setTasks] = useState(fakeTasks);
   const [filter, setFilter] = useState(filters[0].label);
   const [showModalTask, setShowModalTask] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState('');
+  const [taskToEdit, setTaskToEdit] = useState({});
 
   const handleShow = () => setShowModalTask(true);
 
@@ -41,7 +41,7 @@ function App() {
   }
 
   const addTask = (task) => {
-    setTasks( oldTasks => [{id: oldTasks.length, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
+    setTasks( oldTasks => [{id: oldTasks.length, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks] );
   }
 
   const editTask = (task) => {
