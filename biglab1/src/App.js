@@ -46,7 +46,7 @@ function App() {
     },
     
     editTask: (task) => {
-      setTasks( oldTasks => [{id: task.id+oldTasks.length+1, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks.filter(t => t.id !== task.id)] );
+      setTasks( oldTasks => oldTasks.map(t => {if(t.id === task.id) return {id: task.id+oldTasks.length+1, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline};return t;}) );
     },
     
     deleteTask: (id) => {

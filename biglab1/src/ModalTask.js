@@ -48,7 +48,7 @@ function ModalTask (props) {
                 setProject(event.target.value);
                 break;
             case 'deadline-date':
-                setDeadline(`${event.target.value}T${(deadline.split('T')[1] === '')? '00:00' : deadline.split('T')[1]}`);
+                setDeadline(`${event.target.value}T${(!deadline.split('T')[1] || deadline.split('T')[1] === '')? '00:00' : deadline.split('T')[1]}`);
                 break;
             case 'deadline-time':
                 setDeadline(`${(deadline.split('T')[0] === '')? dayjs().format('YYYY-MM-DD') : deadline.split('T')[0]}T${event.target.value}`);
