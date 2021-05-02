@@ -46,7 +46,7 @@ function App() {
     },
     
     editTask: (task) => {
-      setTasks( oldTask => [task, ...oldTask.filter(t => t.id !== task.id)] );
+      setTasks( oldTasks => [{id: task.id+oldTasks.length+1, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline}, ...oldTasks.filter(t => t.id !== task.id)] );
     },
     
     deleteTask: (id) => {
@@ -60,7 +60,6 @@ function App() {
       document.getElementById(`filter-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
       document.getElementById(`filter-mobile-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
     });
-    console.log('filter '+filter.label);
     if(!filters.map(filter => filter.label).includes(filter.label)) return;
     document.getElementById(`filter-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
     document.getElementById(`filter-mobile-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
