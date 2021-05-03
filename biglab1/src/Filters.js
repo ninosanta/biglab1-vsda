@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import DayJS from 'react-dayjs';
 
 function getTasks (tasks, filter) {
     switch(filter){

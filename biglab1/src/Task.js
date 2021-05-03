@@ -33,25 +33,19 @@ function TasksList (props) {
 }
 
 function Task(props) {
-    const [taskId, setId] = useState(props.task.id);
     const [taskCompleted, setCompleted] = useState(props.task.completed === 'true' || props.task.completed === true);
-    const [taskDescription, setDescription] = useState(props.task.description);
-    const [taskImportant, setImportant] = useState(props.task.important === 'true' || props.task.important === true);
-    const [taskPrivate, setPrivate] = useState(props.task.private === 'true' || props.task.private === true);
-    const [taskProject, setProject] = useState(props.task.project);
-    const [taskDeadline, setDeadline] = useState(props.task.deadline);
 
     return (
         <Row >
-            <ListGroup.Item id={`task-${taskId}`} className='list-group-item d-flex w-100' action>
+            <ListGroup.Item id={`task-${props.task.id}`} className='list-group-item d-flex w-100' action>
                 <Col onClick={() => props.handleTaskList.setEditTask(props.task)}>
                     <Row>
-                        <Col xs={4}> <TaskDescription id={taskId} completed={taskCompleted} description={taskDescription} setCompleted={ event => setCompleted(event.target.checked) } important={taskImportant}/> </Col>
-                        <Col xs={1}> <TaskPrivateIcon id={taskId} private={taskPrivate}/> </Col>
+                        <Col xs={4}> <TaskDescription id={props.task.id} completed={taskCompleted === 'true' || props.task.completed === true} description={props.task.description} setCompleted={ event => setCompleted(event.target.checked) } important={props.task.important === 'true' || props.task.important === true}/> </Col>
+                        <Col xs={1}> <TaskPrivateIcon id={props.task.id} private={props.task.private === 'true' || props.task.private === true}/> </Col>
                         <Col>
                             <Row>
-                                <Col className='d-inline-flex'> <TaskProject id={taskId} project={taskProject}/> </Col>
-                                <Col className='d-inline-flex'> <TaskDeadline id={taskId} deadline={taskDeadline}/> </Col>
+                                <Col className='d-inline-flex'> <TaskProject id={props.task.id} project={props.task.project}/> </Col>
+                                <Col className='d-inline-flex'> <TaskDeadline id={props.task.id} deadline={props.task.deadline}/> </Col>
                             </Row>
                         </Col>
                     </Row>
@@ -102,10 +96,10 @@ function TaskControls(props) {
     return (
         <Row>
             <div className='pr-2' onClick={() => props.handleTaskList.setEditTask(props.task)}>
-                <i id={`task-${props.id}-edit`} className='bi bi-pencil-square text-primary' aria-label='Edit'></i>
+                <i id={`task-${props.task.id}-edit`} className='bi bi-pencil-square text-primary' aria-label='Edit'></i>
             </div>
             <div className='pr-2' onClick={() => props.handleTaskList.deleteTask(props.task.id)}>
-                <i id={`task-${props.id}-delete`} className='bi bi-trash text-danger' aria-label='Delete'></i>
+                <i id={`task-${props.task.id}-delete`} className='bi bi-trash text-danger' aria-label='Delete'></i>
             </div>
         </Row>
     );
