@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ListGroup, Badge, Form, Row, Col } from 'react-bootstrap';
 import DayJS from 'react-dayjs';
 import getTasks from './Filters'
-
+import { Link } from 'react-router-dom';
 /**
  function formatDeadline(date){
     if(!date) return '--o--';
@@ -17,11 +17,11 @@ import getTasks from './Filters'
     }
 } */
 
-function TasksList (props) {
+function TasksList(props) {
     return (
         <ListGroup variant='flush'>
             {
-                getTasks(props.tasks, props.filter).map( (task) => 
+                getTasks(props.tasks, props.filter).map((task) =>
                     <Task
                         key={`task-${task.id}`}
                         task={task}
@@ -38,21 +38,21 @@ function Task(props) {
     return (
         <Row >
             <ListGroup.Item id={`task-${props.task.id}`} className='list-group-item d-flex w-100' action>
-                <Col onClick={() => props.handleTaskList.setEditTask(props.task)}>
+                <Col>
                     <Row>
-                        <Col xs={4}> <TaskDescription id={props.task.id} completed={taskCompleted} description={props.task.description} setCompleted={ event => setCompleted(event.target.checked) } important={props.task.important === 'true' || props.task.important === true}/> </Col>
-                        <Col xs={1}> <TaskPrivateIcon id={props.task.id} private={props.task.private === 'true' || props.task.private === true}/> </Col>
+                        <Col xs={4}> <TaskDescription id={props.task.id} completed={taskCompleted} description={props.task.description} setCompleted={event => setCompleted(event.target.checked)} important={props.task.important === 'true' || props.task.important === true} /> </Col>
+                        <Col xs={1}> <TaskPrivateIcon id={props.task.id} private={props.task.private === 'true' || props.task.private === true} /> </Col>
                         <Col>
                             <Row>
-                                <Col className='d-inline-flex'> <TaskProject id={props.task.id} project={props.task.project}/> </Col>
-                                <Col className='d-inline-flex'> <TaskDeadline id={props.task.id} deadline={props.task.deadline}/> </Col>
+                                <Col className='d-inline-flex'> <TaskProject id={props.task.id} project={props.task.project} /> </Col>
+                                <Col className='d-inline-flex'> <TaskDeadline id={props.task.id} deadline={props.task.deadline} /> </Col>
                             </Row>
                         </Col>
                     </Row>
                 </Col>
                 <Col xs={1} className='d-inline-flex flex-row-reverse'>
                     <Row>
-                        <TaskControls task={props.task} handleTaskList={props.handleTaskList}/>
+                        <TaskControls task={props.task} handleTaskList={props.handleTaskList} />
                     </Row>
                 </Col>
             </ListGroup.Item>
@@ -60,31 +60,31 @@ function Task(props) {
     );
 }
 
-function TaskDescription (props) {
+function TaskDescription(props) {
     return (
         <Form>
             <Form.Check id={`task-${props.id}-checkbox`} custom>
-                <Form.Check.Input type='checkbox' defaultChecked={props.completed} value={props.completed} onChange={props.setCompleted}/>
+                <Form.Check.Input type='checkbox' defaultChecked={props.completed} value={props.completed} onChange={props.setCompleted} disabled/>
                 <Form.Check.Label className={props.important ? 'text-danger' : ''}>{props.description}</Form.Check.Label>
             </Form.Check>
         </Form>
     );
 }
 
-function TaskPrivateIcon (props) {
-    if(props.private) return (<i id={`task-${props.id}-private`} className='bi bi-eye-slash-fill ml-3' aria-label='Private' variant='secondary' style={{ fontSize: '1em' }}></i>);
+function TaskPrivateIcon(props) {
+    if (props.private) return (<i id={`task-${props.id}-private`} className='bi bi-eye-slash-fill ml-3' aria-label='Private' variant='secondary' style={{ fontSize: '1em' }}></i>);
     return (<></>);
 }
 
-function TaskProject (props) {
-    if(props.project) return (
+function TaskProject(props) {
+    if (props.project) return (
         <Badge id={`task-${props.id}-project`} pill variant='info'>
             {props.project}
         </Badge>);
     return (<></>);
 }
 
-function TaskDeadline (props) {
+function TaskDeadline(props) {
     if (props.deadline) return (
         <Badge id={`task-${props.id}-date`} variant='dark'>
             <DayJS format='MMMM D, YYYY h:mm A'>{props.deadline}</DayJS>
@@ -95,9 +95,10 @@ function TaskDeadline (props) {
 function TaskControls(props) {
     return (
         <Row>
-            <div className='pr-2' onClick={() => props.handleTaskList.setEditTask(props.task)}>
-                <i id={`task-${props.task.id}-edit`} className='bi bi-pencil-square text-primary' aria-label='Edit'></i>
-            </div>
+            <Link to={{ pathname:"/update", state: {task: props.task}}}>
+                <div className='pr-2'>
+                    <i id={`task-${props.task.id}-edit`} className='bi bi-pencil-square text-primary' aria-label='Edit'></i>
+                </div></Link>
             <div className='pr-2' onClick={() => props.handleTaskList.deleteTask(props.task.id)}>
                 <i id={`task-${props.task.id}-delete`} className='bi bi-trash text-danger' aria-label='Delete'></i>
             </div>
