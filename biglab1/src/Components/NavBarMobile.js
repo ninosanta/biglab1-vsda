@@ -26,7 +26,7 @@ function NavBarMobile(props) {
                                     className='p-2 btn-primary w-100 text-light'
                                     style={{ fontSize: '1.5em' }}
                                     title={filter.label}
-                                    onClick={ () => props.setFilter(filter) }>
+                                    onClick={ () => props.setFilter(filter.label) }>
                                     <Row>
                                         <Col md={1} xs={2}><i id={`filter-mobile-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center`}  aria-label={filter.label}></i></Col>
                                         <Col>{filter.label}</Col>
@@ -42,15 +42,15 @@ function NavBarMobile(props) {
 
 function Search (props) {
     return (
-        <Nav.Link id='filter-search' className='pl-3  btn-primary text-light' style={{ fontSize: '1.5em' }} title='Search'>
+        <Nav.Link id='filter-search' className='pl-3 btn-primary text-light' style={{ fontSize: '1.5em' }} title='Search'>
             <Row>
-                <Col md={1} xs={2}><i className='bi bi-search'></i></Col>
+                <Col xs={1}><i className='bi bi-search'></i></Col>
                 <Col>
                     <Form inline>
                         <FormControl 
                             type='text' 
                             placeholder='Type to filter...' 
-                            className='mr-sm-2 w-sm-75' 
+                            className='mr-0 w-75' 
                             onChange={(e) => {
                                 props.setSearch(e.target.value.length > 0);
                                 if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
