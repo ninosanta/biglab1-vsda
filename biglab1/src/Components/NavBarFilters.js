@@ -24,26 +24,8 @@ function NavBarFilters(props) {
                             </Link>);
                     })}
 
-                    <OverlayTrigger placement='right' overlay={
-                        <Popover id='search-popover'>
-                            <Popover.Title as='h3'>Search task</Popover.Title>
-                            <Popover.Content>
-                                <FormControl
-                                    autoFocus
-                                    className='mx-2 w-auto'
-                                    placeholder='Type to filter...'
-                                    onChange={(e) => {
-                                        setSearch(e.target.value.length > 0);
-                                        if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
-                                        else if(e.target.value.length <= 15) props.setFilter(e.target.value);
-                                    }}/>
-                            </Popover.Content>
-                        </Popover>
-                    }>
-                        <Button id='search' key='search' className='pt-3 pb-3 btn-primary text-light' variant='link' block><i className='bi bi-search d-flex justify-content-center' aria-label='Search' style={{ fontSize: '1.5rem' }}></i></Button>
-                    </OverlayTrigger>
+                    <Search setFilter={props.setFilter} setSearch={setSearch} filters={props.filters}/>
 
-                    <Button id='options' key='options' className='pt-3 pb-3 btn-primary  text-light' variant='link' block><i className='bi bi-three-dots d-flex justify-content-center' aria-label='Options' style={{ fontSize: '1.5rem' }}></i></Button>
                 </ButtonGroup>
 
                 <div className='pe-auto'>
@@ -51,6 +33,29 @@ function NavBarFilters(props) {
                 </div>
             </Nav>
         </Col>);
+}
+
+function Search (props) {
+    return (
+        <OverlayTrigger placement='right' overlay={
+            <Popover id='search-popover'>
+                <Popover.Title as='h3'>Search task</Popover.Title>
+                <Popover.Content>
+                    <FormControl
+                        autoFocus
+                        className='mx-2 w-auto'
+                        placeholder='Type to filter...'
+                        onChange={(e) => {
+                            props.setSearch(e.target.value.length > 0);
+                            if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
+                            else if(e.target.value.length <= 15) props.setFilter(e.target.value);
+                        }}/>
+                </Popover.Content>
+            </Popover>
+        }>
+            <Button id='search' key='search' className='pt-3 pb-3 btn-primary text-light' variant='link' block><i className='bi bi-search d-flex justify-content-center' aria-label='Search' style={{ fontSize: '1.5rem' }}></i></Button>
+        </OverlayTrigger>
+    );
 }
 
 export default NavBarFilters;
