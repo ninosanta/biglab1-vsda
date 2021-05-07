@@ -50,7 +50,7 @@ function Search (props) {
                         <FormControl 
                             type='text' 
                             placeholder='Type to filter...' 
-                            className='mr-0 w-75' 
+                            className='w-100' 
                             onChange={(e) => {
                                 props.setSearch(e.target.value.length > 0);
                                 if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
