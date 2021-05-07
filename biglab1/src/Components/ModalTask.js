@@ -54,7 +54,6 @@ function ModalTask (props) {
                 setMessageDescription('');
                 setImportant(false);
                 setPriv(false);
-                setProject('');
                 setDeadline('T');
                 break;
         }

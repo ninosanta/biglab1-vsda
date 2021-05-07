@@ -1,13 +1,9 @@
 import { Nav, Navbar, Form, FormControl, Image, Row, Col} from 'react-bootstrap';
-import { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function NavBarMobile(props) {
-    const [search, setSearch] = useState(false);
-
     return (
         <>
-            {search ? <Redirect to='/search'/> : <Redirect to='/'/>}
             <Navbar bg='primary' expand='lg' fixed='top'>
                 <Navbar.Brand>
                     <Image className='ml-3' src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg' roundedCircle style={{ height: '2rem', width: '2rem' }}></Image>
@@ -33,7 +29,7 @@ function NavBarMobile(props) {
                                     </Row>
                                 </Link>);
                         })}
-                        <Search setFilter={props.setFilter} setSearch={setSearch} filters={props.filters}/>
+                        <Search setFilter={props.setFilter} ilters={props.filters}/>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -52,9 +48,7 @@ function Search (props) {
                             placeholder='Type to filter...' 
                             className='w-100' 
                             onChange={(e) => {
-                                props.setSearch(e.target.value.length > 0);
-                                if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
-                                else if(e.target.value.length <= 15) props.setFilter(e.target.value);
+                                if(e.target.value.length <= 15) props.setFilter(e.target.value);
                             }}/>
                     </Form>
                 </Col>

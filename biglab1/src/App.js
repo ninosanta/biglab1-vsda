@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 import NavBarFilters from './Components/NavBarFilters';
 import NavBarMobile from './Components/NavBarMobile';
@@ -76,14 +76,16 @@ function App() {
     <Router>
       <Container fluid={true} className='pe-3 m-0'>
         <Col className='p-0 m-0'>
-          <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters} setFilter={selectFilter} /></Row>
+          <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters} setFilter={selectFilter} setSearch={setSearch}/></Row>
           <Row>
-            <NavBarFilters filters={filters} setFilter={selectFilter} />
+            <NavBarFilters filters={filters} setFilter={selectFilter} setSearch={setSearch}/>
             <Col className='p-5 m-0 mr-md-4'>
               <Row className='d-flex flex-row-reverse'>
                 <DaytimeFilters filters={daytimeFilters} />
               </Row>
               <TasksList tasks={tasks} filters={filters} handleTaskList={handleTaskList} search={search}/>
+              {search !== '' ? <Redirect to='/search'/> : <></>}
+              {(location.pathname === '/search' && search === '') ? <Redirect to='/'/> : <></>}
             </Col>
           </Row>
         </Col>

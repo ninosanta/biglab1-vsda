@@ -1,13 +1,9 @@
 import {Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button, Col } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function NavBarFilters(props) {
-    const [search, setSearch] = useState(false);
-
     return (
         <Col md={1} className='d-none d-lg-block align-items-center text-center p-0'>
-            {search ? <Redirect to='/search'/> : <Redirect to='/'/>}
             <Nav id='filter-navbar' className='d-flex flex-column bg-primary position-fixed text-center' style={{ minHeight: '100%', width: '5rem' }}>
                 <ButtonGroup vertical className='pt-5 align-items-center'>
                     {props.filters.map(filter => {
@@ -24,7 +20,7 @@ function NavBarFilters(props) {
                             </Link>);
                     })}
 
-                    <Search setFilter={props.setFilter} setSearch={setSearch} filters={props.filters}/>
+                    <Search setFilter={props.setFilter} filters={props.filters}/>
 
                 </ButtonGroup>
 
@@ -46,9 +42,7 @@ function Search (props) {
                         className='mx-2 w-auto'
                         placeholder='Type to filter...'
                         onChange={(e) => {
-                            props.setSearch(e.target.value.length > 0);
-                            if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
-                            else if(e.target.value.length <= 15) props.setFilter(e.target.value);
+                            if(e.target.value.length <= 15) props.setFilter(e.target.value);
                         }}/>
                 </Popover.Content>
             </Popover>
