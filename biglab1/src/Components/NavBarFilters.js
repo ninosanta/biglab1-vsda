@@ -1,20 +1,28 @@
 import {Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button, Col } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
+import { useState } from 'react';
 
 function NavBarFilters(props) {
+    const [search, setSearch] = useState(false);
+
     return (
-        <Col md={1} className='d-none d-lg-block bg-light align-items-center text-center p-0'>
+        <Col md={1} className='d-none d-lg-block align-items-center text-center p-0'>
+            {search ? <Redirect to='/search'/> : <Redirect to='/'/>}
             <Nav id='filter-navbar' className='d-flex flex-column bg-primary position-fixed text-center' style={{ minHeight: '100%', width: '5rem' }}>
-                <ButtonGroup vertical className='w-100 pt-5 align-items-center'>
+                <ButtonGroup vertical className='pt-5 align-items-center'>
                     {props.filters.map(filter => {
-                        return (<Button
-                            key={`filter-${filter.label}`}
-                            id={`filter-${filter.label}`}
-                            className='pt-3 pb-3 btn-primary text-light'
-                            variant='link'
-                            block
-                            onClick={ () => props.setFilter(filter) }>
-                            <i id={`filter-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center`} aria-label={filter.label} style={{ fontSize: '1.5em' }}></i>
-                        </Button>);
+                        return (
+                            <Link to={`/${filter.label}`} className='w-100'>
+                                <Button
+                                    key={`filter-${filter.label}`}
+                                    id={`filter-${filter.label}`}
+                                    className='pt-3 pb-3 btn-primary'
+                                    variant='link'
+                                    block
+                                    onClick={ () => props.setFilter(filter.label) }>
+                                    <i id={`filter-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center text-light`} aria-label={filter.label} style={{ fontSize: '1.5em' }}/>
+                                </Button>
+                            </Link>);
                     })}
 
                     <OverlayTrigger placement='right' overlay={
@@ -26,8 +34,9 @@ function NavBarFilters(props) {
                                     className='mx-2 w-auto'
                                     placeholder='Type to filter...'
                                     onChange={(e) => {
-                                        if(e.target.value.length < 1) props.setFilter(props.filters[0]);
-                                        else if(e.target.value.length <= 15) props.setFilter({label: e.target.value});
+                                        setSearch(e.target.value.length > 0);
+                                        if(e.target.value.length < 1) props.setFilter(props.filters[0].label);
+                                        else if(e.target.value.length <= 15) props.setFilter(e.target.value);
                                     }}/>
                             </Popover.Content>
                         </Popover>

@@ -1,34 +1,32 @@
 import { useState } from 'react';
 import { ListGroup, Badge, Form, Row, Col } from 'react-bootstrap';
 import DayJS from 'react-dayjs';
-import getTasks from './Filters'
-
-/**
- function formatDeadline(date){
-    if(!date) return '--o--';
-    else if(isToday(date)) {
-        return date.format('[Today at] HH:mm');
-    } else if(isTomorrow(date)) {
-        return date.format('[Tomorrow at] HH:mm');
-    } else if(isYesterday(date)) {
-        return date.format('[Yesterday at] HH:mm');
-    } else {
-        return date.format('dddd DD MMMM YYYY [at] HH:mm');
-    }
-} */
+import { Switch, Route, Redirect } from 'react-router-dom';
+import getTasks from '../Filters'
+import { useParams } from 'react-router-dom';
 
 function TasksList (props) {
     return (
-        <ListGroup variant='flush'>
-            {
-                getTasks(props.tasks, props.filter).map( (task) => 
-                    <Task
-                        key={`task-${task.id}`}
-                        task={task}
-                        handleTaskList={props.handleTaskList}
-                    />)
-            }
-        </ListGroup>
+        <Switch>
+            <Route exact path='/'>
+                <Redirect to={`/${props.filters[0].label}`}/>
+            </Route>
+            <Route path='/search'>
+                <Row className='d-flex flex-row'><h1 id='filter-title' className='mt-4'>{props.search}</h1></Row>
+                <ListGroup variant='flush'>
+                    {getTasks(props.tasks, props.search).map( (task) => <Task key={`task-${task.id}`} task={task} handleTaskList={props.handleTaskList}/>)}
+                </ListGroup>
+            </Route>
+            {props.filters.map(filter => {
+                return (
+                    <Route key={`route-${filter.label}`} path={`/${filter.label}`}>
+                        <Row className='d-flex flex-row'><h1 id='filter-title' className='mt-4'>{filter.label}</h1></Row>
+                        <ListGroup variant='flush'>
+                            {getTasks(props.tasks, filter.label).map( (task) => <Task key={`task-${task.id}`} task={task} handleTaskList={props.handleTaskList}/>)}
+                        </ListGroup>
+                    </Route>
+            )})}
+        </Switch>
     );
 }
 
@@ -38,7 +36,7 @@ function Task(props) {
     return (
         <Row >
             <ListGroup.Item id={`task-${props.task.id}`} className='list-group-item d-flex w-100' action>
-                <Col onClick={() => props.handleTaskList.setEditTask(props.task)}>
+                <Col>
                     <Row>
                         <Col xs={4}> <TaskDescription id={props.task.id} completed={taskCompleted} description={props.task.description} setCompleted={ event => setCompleted(event.target.checked) } important={props.task.important === 'true' || props.task.important === true}/> </Col>
                         <Col xs={1}> <TaskPrivateIcon id={props.task.id} private={props.task.private === 'true' || props.task.private === true}/> </Col>

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import NavBarFilters from './NavBarFilters';
-import NavBarProjects from './NavBarProjects';
-import NavBarMobile from './NavBarMobile';
-import DaytimeFilters from './DaytimeFilters';
-import TasksList from './Task';
-import ModalTask from './ModalTask';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+
+import NavBarFilters from './Components/NavBarFilters';
+import NavBarMobile from './Components/NavBarMobile';
+import DaytimeFilters from './Components/DaytimeFilters';
+import TasksList from './Components/Task';
+import ModalTask from './Components/ModalTask';
 
 const fakeTasks = [ // id: 0 is "false" so we should start from 1
   { id: 1, completed: 'false', description: 'task1', important: 'true', private: 'false', project: 'PDS', deadline: '2021-04-29T12:00' },
@@ -29,8 +30,8 @@ const daytimeFilters = ['All', 'Morning', 'Afternoon', 'Evening', 'Night'];
 function App() {
   const [open, setOpen] = useState(false);
   const [tasks, setTasks] = useState(fakeTasks);
-  const [filter, setFilter] = useState(filters[0].label);
   const [modalTask, setModalTask] = useState({ show: false, task: undefined });
+  const [search, setSearch] = useState('');
 
   const handleModalTask = (show, task) => {
     setModalTask({ show: show, task: task });
@@ -46,7 +47,7 @@ function App() {
     },
 
     editTask: (task) => {
-      setTasks(oldTasks => oldTasks.map((t) => {if (t.id === task.id) return task; return t;}));
+      setTasks(oldTasks => oldTasks.map((t) => { t.id === task.id ? task : t }));
     },
 
     deleteTask: (id) => {
@@ -55,40 +56,42 @@ function App() {
   }
 
   function selectFilter(filter) {
-    setFilter(filter.label);
+    let icon;
     filters.forEach(f => {
+      if(f.label === filter) icon = f.icon;
       document.getElementById(`filter-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
       document.getElementById(`filter-mobile-${f.label}-icon`).classList.replace(`bi-${f.icon}-fill`, `bi-${f.icon}`);
     });
-    if (!filters.map(filter => filter.label).includes(filter.label)) return;
-    document.getElementById(`filter-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
-    document.getElementById(`filter-mobile-${filter.label}-icon`).classList.replace(`bi-${filter.icon}`, `bi-${filter.icon}-fill`);
+    if (filters.map(f => f.label).includes(filter)) {
+      setSearch('');
+      document.getElementById(`filter-${filter}-icon`).classList.replace(`bi-${icon}`, `bi-${icon}-fill`);
+      document.getElementById(`filter-mobile-${filter}-icon`).classList.replace(`bi-${icon}`, `bi-${icon}-fill`);
+    } else {
+      setSearch(filter);
+    }
   }
 
   return (
-    <Container fluid={true} className='pe-3 m-0'>
-      <Col className='p-0 m-0'>
-        <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters} setFilter={selectFilter} /></Row>
-        <Row>
-          <NavBarFilters filters={filters} setFilter={selectFilter} />
-          {/*<CollapseBar filters={filters}/>*/}
-          <Col md={3} className='d-none d-lg-block bg-light align-items-center text-center'><NavBarProjects filters={filters} /></Col>
-          <Col className='p-5 m-0 mr-md-4'>
-            <Row className='d-flex flex-row-reverse'>
-              <DaytimeFilters filters={daytimeFilters} />
-            </Row>
-            <Row className='d-flex flex-row'>
-              <h1 id='filter-title' className='mt-4'>{filter}</h1>
-            </Row>
-            <TasksList tasks={tasks} filter={filter} handleTaskList={handleTaskList} />
-          </Col>
-        </Row>
-      </Col>
-      <Button className='btn btn-lg btn-primary position-fixed rounded-circle' style={{ width: '3.5rem', height: '3.5rem', bottom: '2rem', right: '2rem', zIndex: '2' }} onClick={() => handleModalTask(true, undefined)}>
-        <i className='bi bi-plus-circle-dotted text-light d-flex justify-content-center' style={{ fontSize: '2rem' }} />
-      </Button>
-      <Modal show={modalTask.show} task={modalTask.task} handleModalTask={handleModalTask} handleTaskList={handleTaskList} />
-    </Container>
+    <Router>
+      <Container fluid={true} className='pe-3 m-0'>
+        <Col className='p-0 m-0'>
+          <Row className='d-block d-lg-none bg-primary mb-5'><NavBarMobile open={open} setOpen={setOpen} filters={filters} setFilter={selectFilter} /></Row>
+          <Row>
+            <NavBarFilters filters={filters} setFilter={selectFilter} />
+            <Col className='p-5 m-0 mr-md-4'>
+              <Row className='d-flex flex-row-reverse'>
+                <DaytimeFilters filters={daytimeFilters} />
+              </Row>
+              <TasksList tasks={tasks} filters={filters} handleTaskList={handleTaskList} search={search}/>
+            </Col>
+          </Row>
+        </Col>
+        <Button className='btn btn-lg btn-primary position-fixed rounded-circle' style={{ width: '3.5rem', height: '3.5rem', bottom: '2rem', right: '2rem', zIndex: '2' }} onClick={() => handleModalTask(true, undefined)}>
+          <i className='bi bi-plus-circle-dotted text-light d-flex justify-content-center' style={{ fontSize: '2rem' }} />
+        </Button>
+        <Modal show={modalTask.show} task={modalTask.task} handleModalTask={handleModalTask} handleTaskList={handleTaskList} />
+      </Container>
+    </Router>
   );
 }
 
