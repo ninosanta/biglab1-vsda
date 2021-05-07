@@ -10,7 +10,6 @@ function ModalTask (props) {
     const [messageDescription, setMessageDescription] = useState('');
     const [important, setImportant] = useState(props.task?.id? props.task.important === 'true' || props.task.important === true : false);
     const [priv, setPriv] = useState(props.task?.id? props.task.private === 'true' || props.task.private === true : false);
-    const [project, setProject] = useState(props.task?.id? props.task.project : '');
     const [deadline, setDeadline] = useState(props.task?.id? props.task.deadline : 'T');
 
     const handleSubmit = (event) => {
@@ -18,9 +17,9 @@ function ModalTask (props) {
         event.stopPropagation();
         if(event.currentTarget.checkValidity()) {
             if(props.task?.id)
-                props.handleTaskList.editTask({id: props.task.id, completed: completed, description: description, important: important, private: priv, project: project, deadline: (deadline !== 'T')? deadline : ''});
+                props.handleTaskList.editTask({id: props.task.id, completed: completed, description: description, important: important, private: priv, deadline: (deadline !== 'T')? deadline : ''});
             else
-                props.handleTaskList.addTask({completed: completed, description: description, important: important, private: priv, project: project, deadline: (deadline !== 'T')? deadline : ''});
+                props.handleTaskList.addTask({completed: completed, description: description, important: important, private: priv, deadline: (deadline !== 'T')? deadline : ''});
             handleClose();
         } else {
             setValidated(true);

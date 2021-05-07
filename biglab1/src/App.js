@@ -39,7 +39,7 @@ function App() {
 
   const handleTaskList = {
     addTask: (task) => {
-      setTasks(oldTasks => [{ id: oldTasks.length + 1, completed: task.completed, description: task.description, important: task.important, private: task.private, project: task.project, deadline: task.deadline }, ...oldTasks]);
+      setTasks(oldTasks => [{ id: oldTasks.length + 1, completed: task.completed, description: task.description, important: task.important, private: task.private, deadline: task.deadline }, ...oldTasks]);
     },
 
     setEditTask: (task) => {
@@ -47,7 +47,8 @@ function App() {
     },
 
     editTask: (task) => {
-      setTasks(oldTasks => oldTasks.map((t) => { t.id === task.id ? task : t }));
+      
+      setTasks(oldTasks => oldTasks.map((t) => { return t.id === task.id ? task : t }));
     },
 
     deleteTask: (id) => {
