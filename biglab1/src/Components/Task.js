@@ -42,8 +42,7 @@ function Task(props) {
                         <Col xs={1}> <TaskPrivateIcon id={props.task.id} private={props.task.private === 'true' || props.task.private === true}/> </Col>
                         <Col>
                             <Row>
-                                <Col className='d-inline-flex'> <TaskProject id={props.task.id} project={props.task.project}/> </Col>
-                                <Col className='d-inline-flex'> <TaskDeadline id={props.task.id} deadline={props.task.deadline}/> </Col>
+                                <Col className='d-inline-flex flex-row-reverse'> <TaskDeadline id={props.task.id} deadline={props.task.deadline}/> </Col>
                             </Row>
                         </Col>
                     </Row>
@@ -71,14 +70,6 @@ function TaskDescription (props) {
 
 function TaskPrivateIcon (props) {
     if(props.private) return (<i id={`task-${props.id}-private`} className='bi bi-eye-slash-fill ml-3' aria-label='Private' variant='secondary' style={{ fontSize: '1em' }}></i>);
-    return (<></>);
-}
-
-function TaskProject (props) {
-    if(props.project) return (
-        <Badge id={`task-${props.id}-project`} pill variant='info'>
-            {props.project}
-        </Badge>);
     return (<></>);
 }
 

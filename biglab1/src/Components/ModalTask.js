@@ -44,9 +44,6 @@ function ModalTask (props) {
             case 'private':
                 setPriv(event.target.checked);
                 break;
-            case 'project':
-                setProject(event.target.value);
-                break;
             case 'deadline-date':
                 setDeadline(`${event.target.value}T${(!deadline.split('T')[1] || deadline.split('T')[1] === '')? '00:00' : deadline.split('T')[1]}`);
                 break;
@@ -96,14 +93,6 @@ function ModalTask (props) {
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group as={Col} md='6'>
-                            <Form.Label>Project</Form.Label>
-                            <Form.Control id='form-project' as='select' value={project} onChange={(e)=>{handleChange('project', e)}}>
-                                <option value='' disabled>Choose one...</option>
-                                <option value='PDS'>PDS</option>
-                                <option value='Web Application I'>Web Application I</option>
-                            </Form.Control>
-                        </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Deadline</Form.Label>
                             <Form.Control id='form-deadline-date' type='date' name='deadline-date' value={deadline.split('T')[0]} onChange={(e)=>{handleChange('deadline-date', e)}}/>
