@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 import NavBarFilters from './Components/NavBarFilters';
 import NavBarMobile from './Components/NavBarMobile';
-import DaytimeFilters from './Components/DaytimeFilters';
 import TasksList from './Components/Task';
 import ModalTask from './Components/ModalTask';
 
@@ -80,9 +79,6 @@ function App() {
           <Row>
             <NavBarFilters filters={filters} setFilter={selectFilter} setSearch={setSearch}/>
             <Col className='p-5 m-0 mr-md-4'>
-              <Row className='d-flex flex-row-reverse'>
-                <DaytimeFilters filters={daytimeFilters} />
-              </Row>
               <TasksList tasks={tasks} filters={filters} handleTaskList={handleTaskList} search={search}/>
             </Col>
           </Row>
