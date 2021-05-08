@@ -1,7 +1,9 @@
 import {Nav, OverlayTrigger, Popover, FormControl, Image, ButtonGroup, Button, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function NavBarFilters(props) {
+    const location = useLocation();
+
     return (
         <Col md={1} className='d-none d-lg-block align-items-center text-center p-0'>
             <Nav id='filter-navbar' className='d-flex flex-column bg-primary position-fixed text-center' style={{ minHeight: '100%', width: '5rem' }}>
@@ -15,7 +17,7 @@ function NavBarFilters(props) {
                                     variant='link'
                                     block
                                     onClick={ () => props.setFilter(filter.label) }>
-                                    <i id={`filter-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center text-light`} aria-label={filter.label} style={{ fontSize: '1.5em' }}/>
+                                    <i id={`filter-${filter.label}-icon`} className={`bi ${(`/${filter.label}` === location.pathname)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center text-light`} aria-label={filter.label} style={{ fontSize: '1.5em' }}/>
                                 </Button>
                             </Link>);
                     })}
@@ -25,7 +27,7 @@ function NavBarFilters(props) {
                 </ButtonGroup>
 
                 <div className='pe-auto'>
-                    <Image src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg' roundedCircle style={{ marginTop: '5rem', width: '3em', height: '3em' }}></Image>
+                    <Image id='profile-image' src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg' roundedCircle style={{ marginTop: '5rem', width: '3em', height: '3em' }}></Image>
                 </div>
             </Nav>
         </Col>);

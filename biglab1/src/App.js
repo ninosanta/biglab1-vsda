@@ -84,8 +84,6 @@ function App() {
                 <DaytimeFilters filters={daytimeFilters} />
               </Row>
               <TasksList tasks={tasks} filters={filters} handleTaskList={handleTaskList} search={search}/>
-              {search !== '' ? <Redirect to='/search'/> : <></>}
-              {(location.pathname === '/search' && search === '') ? <Redirect to='/'/> : <></>}
             </Col>
           </Row>
         </Col>

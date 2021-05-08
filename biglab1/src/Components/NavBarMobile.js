@@ -1,12 +1,14 @@
 import { Nav, Navbar, Form, FormControl, Image, Row, Col} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function NavBarMobile(props) {
+    const location = useLocation();
+
     return (
         <>
             <Navbar bg='primary' expand='lg' fixed='top'>
                 <Navbar.Brand>
-                    <Image className='ml-3' src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg' roundedCircle style={{ height: '2rem', width: '2rem' }}></Image>
+                    <Image id='profile-image-mobile' className='ml-3' src='https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg' roundedCircle style={{ height: '2rem', width: '2rem' }}></Image>
                 </Navbar.Brand>
                 <Navbar.Toggle style={{border:'none'}} >
                     <i className='bi bi-list-nested text-light' aria-label='Home' style={{ fontSize: '1.5rem' }}></i>
@@ -24,7 +26,7 @@ function NavBarMobile(props) {
                                     title={filter.label}
                                     onClick={ () => props.setFilter(filter.label) }>
                                     <Row>
-                                        <Col md={1} xs={2}><i id={`filter-mobile-${filter.label}-icon`} className={`bi ${(filter.label === props.filters[0].label)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center`}  aria-label={filter.label}></i></Col>
+                                        <Col md={1} xs={2}><i id={`filter-mobile-${filter.label}-icon`} className={`bi ${(`/${filter.label}` === location.pathname)? `bi-${filter.icon}-fill` : `bi-${filter.icon}`} d-flex justify-content-center`}  aria-label={filter.label}></i></Col>
                                         <Col>{filter.label}</Col>
                                     </Row>
                                 </Link>);
