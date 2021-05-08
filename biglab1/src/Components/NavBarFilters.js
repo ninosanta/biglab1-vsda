@@ -10,7 +10,10 @@ function NavBarFilters(props) {
                 <ButtonGroup vertical className='pt-5 align-items-center'>
                     {props.filters.map(filter => {
                         return (
-                            <Link key={`filter-${filter.label}`} to={`/${filter.label}`} className='w-100'>
+                            <Link key={`filter-${filter.label.toLowerCase().replace(/\s/g, "")
+                                                       .replace(/'/g,"")}`}
+                                  to={`/${filter.label.toLowerCase().replace(/\s/g, "")
+                                                      .replace(/'/g,"")}`} className='w-100'>
                                 <Button
                                     id={`filter-${filter.label}`}
                                     className='pt-3 pb-3 btn-primary'

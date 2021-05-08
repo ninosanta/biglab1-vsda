@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import NavBarFilters from './Components/NavBarFilters';
 import NavBarMobile from './Components/NavBarMobile';
@@ -23,8 +23,6 @@ const filters = [
   { label: "Next week's", icon: 'calendar-week' },
   { label: 'Private', icon: 'eye-slash' },
 ];
-
-const daytimeFilters = ['All', 'Morning', 'Afternoon', 'Evening', 'Night'];
 
 function App() {
   const [open, setOpen] = useState(false);

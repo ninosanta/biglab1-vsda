@@ -24,7 +24,10 @@ function TasksList (props) {
                 </Route>
                 {props.filters.map(filter => {
                     return (
-                        <Route key={`route-${filter.label}`} path={`/${filter.label}`}>
+                        <Route key={`route-${filter.label.toLowerCase().replace(/\s/g, "")
+                                                         .replace(/'/g,"")}`}
+                               path={`/${filter.label.toLowerCase().replace(/\s/g, "")
+                                                     .replace(/'/g,"")}`}>
                             <Row className='d-flex flex-row'><h1 id='filter-title' className='mt-4'>{filter.label}</h1></Row>
                             <ListGroup variant='flush'>
                                 {getTasks(props.tasks, filter.label).map( (task) => <Task key={`task-${task.id}`} task={task} handleTaskList={props.handleTaskList}/>)}
